@@ -40,33 +40,31 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                            <li>
+                                <a href="{{route('login')}}" class="nav-link">{{__('Login')}}</a>
+                            </li>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <li>
+                                <a href="{{route('register')}}" class="nav-link">{{__('Register')}}</a>
+                            </li>
                         @else
+                            <li>
+                                <a class="nav-link" href="{{route('users.index')}}">Gerir Utilizadores</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="{{route('roles.index')}}">Gerir Papeis</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="{{route('products.index')}}">Gerir Produtos</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{Auth::user()->name}}
+                                    <span class="caret"></span>
                                 </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Terminar Sessão</a>
+                                    <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none">@csrf</form>
                                 </div>
                             </li>
                         @endguest
@@ -76,7 +74,9 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                @yield('content')
+            </div>
         </main>
     </div>
 </body>
