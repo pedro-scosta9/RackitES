@@ -29,15 +29,20 @@ class CreateRolesTableSeeder extends Seeder
         $role->syncPermissions($permissions);
         $user->assignRole($role->id);
 
-
-        //Premium
+        
+        //Premium User + Role
+        $user = User::create([
+            'name' => "Premium",
+            'email' => 'premium@rackites.com',
+            'password' => bcrypt('12345678')
+            ]);
         $role = Role::create([
             'name' => 'Premium'
         ]);
-
-        //User
+        $role->syncPermissions([3,4,5,6,7,8]);
+        $user->assignRole([$role->id]);        
         
-        //Premium + User
+        //User + User Role
         $user = User::create([
             'name' => "User",
             'email' => 'user@rackites.com',
