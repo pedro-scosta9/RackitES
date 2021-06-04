@@ -1,0 +1,10 @@
+php artisan migrate
+php artisan serve
+composer update
+
+Seed Data Base
+php artisan db:seed --class=AdminUserTableSeeder
+php artisan db:seed --class=PermissionTableSeeder
+php artisan db:seed --class=PremiumTableSeeder
+
+php artisan migrate:refresh
