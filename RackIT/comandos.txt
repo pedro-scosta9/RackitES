@@ -3,6 +3,7 @@ php artisan serve
 composer update
 
 Seed Data Base
+php artisan db:seed --class=CreateRolesTableSeeder
 php artisan db:seed --class=AdminUserTableSeeder
 php artisan db:seed --class=PermissionTableSeeder
 php artisan db:seed --class=PremiumTableSeeder

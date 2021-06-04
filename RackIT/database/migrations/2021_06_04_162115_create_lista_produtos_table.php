@@ -18,6 +18,18 @@ class CreateListaProdutosTable extends Migration
             $table->string('nome');
             $table->timestamps();
         });
+
+        Schema::create('users_has_listaProdutos', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('users_id');
+            $table->unsignedBigInteger('lista_produtos_id');
+            
+            //Chave estrangeira users_id
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+
+            //Chave estrangeira lista_produtos_id
+            $table->foreign('lista_produtos_id')->references('id')->on('lista_produtos')->onDelete('cascade');
+        });
     }
 
     /**
@@ -27,6 +39,7 @@ class CreateListaProdutosTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('users_has_listaProdutos');
         Schema::dropIfExists('lista_produtos');
     }
 }

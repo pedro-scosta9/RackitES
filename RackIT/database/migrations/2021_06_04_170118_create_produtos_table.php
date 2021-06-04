@@ -27,9 +27,7 @@ class CreateProdutosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('produtos_id');
             $table->unsignedBigInteger('categorias_id');
-
-
-
+            
             //Chave estrangeira produtos_id
             $table->foreign('produtos_id')->references('id')->on('produtos')->onDelete('cascade');
 
@@ -45,6 +43,7 @@ class CreateProdutosTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('produtos_has_categorias');
         Schema::dropIfExists('produtos');
     }
 }
