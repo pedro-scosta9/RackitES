@@ -46,11 +46,7 @@ class CreateRolesTableSeeder extends Seeder
         $role = Role::create([
             'name' => 'User'
         ]);
-            
-        for ($i=5; $i <= 7; $i++) { 
-            //$permissions = Permission::pluck('id', 'id')->where('id','=',$i);
-            $role->syncPermissions($i);
-        }
-        $user->assignRole($role->id);
+        $role->syncPermissions([5,6,7,8]);
+        $user->assignRole([$role->id]);
     }
 }
