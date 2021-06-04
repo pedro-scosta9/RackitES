@@ -5,9 +5,8 @@
             <div class="pull-left">
                 <h2>Gerir Utilizadores</h2>
             </div>
-            <div class="pull-right">
-                <a href="{{route('users.create')}}" class="btn btn-success">Criar Utilizador</a>
-            </div>
+            <a href="{{ route('users.create') }}" type="button" class="mt-4 mb-4 btn btn-primary">Criar Utilizador</a>
+
         </div>
     </div>
     @if($message=Session::get('sucess'))
@@ -28,13 +27,25 @@
             <td>{{++$i}}</td>
             <td>{{$user->name}}</td>
             <td>{{$user->email}}</td>
-            <td>
-                {{-- @if(!@empty($user->getRoleNames()))
+            {{-- <td>
+                
+            @if(!@empty($user->getRoleNames()))
                     @foreach ($user->getRoleNames() as $r)
                     <label class="badge badge-sucess">{{$r}}</label>
                     @endforeach 
-                @endif --}}
-            </td> 
+                @endif
+            </td>  --}}
+            
+        
+            <td>
+                @if(!empty($user->getRoleNames()))
+                @foreach ($user->getRoleNames() as $r)
+                    <label class="badge badge-success">{{$r}}​​​​​​​</label>
+                @endforeach
+                @endif
+            </td>
+        
+            
             <td>
                 <a class='btn btn-info' href="{{route('users.show',$user->id)}}">Ver</a>
                 <a class='btn btn-primary' href="{{route('users.edit',$user->id)}}">Editar</a>

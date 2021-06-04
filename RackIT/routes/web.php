@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ProdutosController;
 
 
 /*
@@ -22,9 +24,48 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
-    Route::resource('products', ProductController::class);
+    Route::resource('products', ProdutosController::class);
+
+
+    // Route::resource('category', CategoriaController::class);
+
+    // ROTAS CATEGORIAS
+    Route::get('categoria/add', [CategoriaController::class, 'showcreate'])->name('categoria.inserir');
+    ROute::post('categoria', [CategoriaController::class, 'create'])->name('categoria.insert');
+
+    ROute::get('categoria/{categoria}/edit', [CategoriaController::class, 'showedit'])->name('categoria.edit');
+    Route::put('categoria/{categoria}', [CategoriaController::class, 'edit'])->name('categoria.editar');
+
+    ROute::get('categoria/{categoria}/delete', [CategoriaController::class, 'delete'])->name('categoria.delete');
+    Route::get('categoria', [CategoriaController::class, 'index'])->name('categoria.index');
+
+
+    // ROTAS PRODUTOS
+    Route::get('produto/add', [ProdutosController::class, 'showcreate'])->name('produtos.inserir');
+    ROute::post('produto', [ProdutosController::class, 'create'])->name('produtos.insert');
+
+    ROute::get('produto/{produto}/edit', [ProdutosController::class, 'showedit'])->name('produtos.edit');
+    Route::put('produto/{produto}', [ProdutosController::class, 'edit'])->name('produtos.editar');
+
+    ROute::get('produto/{produto}/delete', [ProdutosController::class, 'delete'])->name('produtos.delete');
+    Route::get('produto', [ProdutosController::class, 'index'])->name('produtos.index');
 });
+
+
+
+// Route::get('produtos', [ProdutosController::class, 'index'])->name('produtos.index');
+
+
+// Route::get('categoria/add', [CategoriaController::class, 'showcreate'])->name('categoria.inserir');
+// ROute::post('categoria', [CategoriaController::class, 'create'])->name('categoria.insert');
+
+// ROute::get('categoria/{categoria}/edit', [CategoriaController::class, 'showedit'])->name('categoria.edit');
+// Route::put('categoria/{categoria}', [CategoriaController::class, 'edit'])->name('categoria.editar');
+
+// ROute::get('categoria/{categoria}/delete', [CategoriaController::class, 'delete'])->name('categoria.delete');
+// Route::get('categoria', [CategoriaController::class, 'index'])->name('categoria.index');

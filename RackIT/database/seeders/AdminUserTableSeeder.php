@@ -19,7 +19,7 @@ class AdminUserTableSeeder extends Seeder
         //
         $user = User::create([
             'name' => "Adminstrador",
-            'email' => 'admin@gmail.com',
+            'email' => 'admin@rackites.com',
             'password' => bcrypt('12345678')
         ]);
         $role = Role::create([

@@ -26,4 +26,14 @@
             </div>
         </div>
     </div>
+    <div class="row">
+
+    <div class="col-xs-12 clo-sm-12 col-md-12">
+        <div class="form-group">
+            <b>Role</b>
+            {{-- {{$role->name}} --}}
+        </div>
+    </div>   
+ </div>
+
 @endsection
