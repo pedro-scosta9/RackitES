@@ -78,6 +78,8 @@ class RegisterController extends Controller
         $user->assignRole('User');
         //Guardo id do user
         $user_id = $user->id;
+        
+        //Criar listaprodutos
         $lista = lista_produto::create([
             'nome' => "Lista " . $data['name'],
         ]);

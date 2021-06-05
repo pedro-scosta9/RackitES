@@ -4,6 +4,15 @@
 @section('content')
 
     <a href="{{ route('categoria.inserir') }}" type="button" class="mt-4 mb-4 btn btn-primary">Inserir Categoria</a>
+    <select name="SelectListaProdutos">
+        @foreach($nomedaslistas as $listas)
+        <option values="{{$listas->id}}">{{$listas ->nome}}</option> 
+        
+        
+        @endforeach
+        {{-- {!! Form::select('size', array($nomedaslistas->id => $nomedaslistas->nome)) !!} --}}
+    </select> 
+
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">

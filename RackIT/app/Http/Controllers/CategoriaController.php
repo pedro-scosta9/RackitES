@@ -3,14 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\categoria;
+use App\Models\lista_produto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class CategoriaController extends Controller
 {
     public function index()
     {
         $categoria = categoria::all();
-        return view('categoria.index', ['categoria' => $categoria]);
+        $userid = Auth::user()->id;
+        // $nomedaslistas = DB::select("select * from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
+        $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
+        $listas = lista_produto::all()->where('id', '=', $userid);
+        return view('categoria.index', ['categoria' => $categoria, 'nomedaslistas' => $nomedaslistas]);
     }
 
     public function showcreate()
