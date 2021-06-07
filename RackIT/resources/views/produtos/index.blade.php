@@ -65,27 +65,24 @@
 
                                             @endif
                                         @endforeach
-                                        <td><i class="fa fa-plus" aria-hidden="true">Ver mais</i></td>
+                                        <td><i class="fa fa-plus text-primary" aria-hidden="true">Ver mais</i></td>
 
                                     </tr>
 
 
                                     {{-- Para cada produto, crio uma nova tabela com as informações de cada produto --}}
-                                    <td colspan="5" id="A{{ $prod->id }}" class="collapse table table-bordered table-condensed">
-                                        <table>
+                                    <td colspan="4" id="A{{ $prod->id }}" class="collapse table table-bordered table-condensed">
+                                        <table class="table">
                                             <thead>
                                                 <tr>
                                                     <th>Data de Compra</th>
-
                                                     <th>Data de Validade</th>
-
                                                     <th>Preço de Compra</th>
-
                                                     <th>Preço Normal</th>
-
                                                     <th>Armazenado</th>
+                                                    <th>Editar</th>
+                                                    <th>Apagar</th>
 
-                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -111,13 +108,15 @@
                                                                             <td>
                                                                                 @foreach ($armazens as $a)
                                                                                     @if ($infoprod->armazemID == $a->id) 
-                                                                                        {{ $a->nome }}                                                                                   
+                                                                                        {{ $a->nome }}
                                                                                     @endif
                                                                                 @endforeach
                                                                             </td>
                                                                             <td>
-                                                                                <a href="{{route('categoria.edit',$infoprod)}}"><i class="fas fa-edit text-info mr-1" ></a>     
-                                                                                <a href="{{route('categoria.delete',$infoprod)}}"><i class="fas fa-trash-alt text-info mr-1"></a>
+                                                                                <a href="{{route('categoria.edit',$infoprod)}}"><i class="fas fa-edit text-info mr-1" ></i></a>  
+                                                                            </td>
+                                                                            <td>  
+                                                                                <a href="{{route('categoria.delete',$infoprod)}}"><i class="fas fa-trash-alt text-info mr-1"></i></a>
                                                                             </td>
                                                 
                                                                           
@@ -131,7 +130,7 @@
                                             </tbody>
                                         </table>
                                     </td>
-                                    </div>
+                </div>
 
 
 
