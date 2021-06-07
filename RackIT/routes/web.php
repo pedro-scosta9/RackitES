@@ -38,6 +38,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('categoria/add', [CategoriaController::class, 'showcreate'])->name('categoria.inserir');
     ROute::post('categoria', [CategoriaController::class, 'create'])->name('categoria.insert');
 
+    // Route::post('categorias', [CategoriaController::class, 'refreshlista'])->name('categoria.refresh');
+
     ROute::get('categoria/{categoria}/edit', [CategoriaController::class, 'showedit'])->name('categoria.edit');
     Route::put('categoria/{categoria}', [CategoriaController::class, 'edit'])->name('categoria.editar');
 
