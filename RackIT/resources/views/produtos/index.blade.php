@@ -6,8 +6,8 @@
     <div class="col-10">
         <select class="form-select" size="1" name="SelectListaProdutos">
             @foreach($nomedaslistas as $listas)
-            <option values="{{$listas->id}}">{{$listas ->nome}}</option> 
-            
+            <option values="{{$listas->id}}">{{$listas ->nome}}</option>
+
             @endforeach
             {{-- {!! Form::select('size', array($nomedaslistas->id => $nomedaslistas->nome)) !!} --}}
         </select>
@@ -47,13 +47,13 @@
                             @php($val = 0)
                                 {{-- Para cada infoproduto com id = idProduto, adiciono1 quantidade --}}
                                 @foreach ($infoproduto as $infoprod)
-                                    @if ($prod->id == $infoprod->idProduto)
+                                    @if ($prod->id == $infoprod->produtosID)
                                         @php($val += 1)
                                         @endif
                                     @endforeach
                                     {{-- Para cada produto crio uma row --}}
                                     <tr data-toggle="collapse" data-target="#A{{ $prod->id }}">
-                                        <td>{{ $prod->id }}</td>
+                                        <td>{{ $prod->codigoBarras }}</td>
                                         <td>{{ $prod->nome }}</td>
                                         {{-- <td>{{ $infoprod->idProduto }}</td> --}}
                                         <td>{{ $val }}</td>
@@ -75,42 +75,63 @@
                                         <table>
                                             <thead>
                                                 <tr>
-                                                    <th>Quantidade</th>
+                                                    <th>Data de Compra</th>
 
-                                                    <th>Codigo Barras</th>
+                                                    <th>Data de Validade</th>
+
+                                                    <th>Preço de Compra</th>
+
+                                                    <th>Preço Normal</th>
+
+                                                    <th>Armazenado</th>
+
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr id="A{{ $prod->id }}" class="collapse">
                                                     @php($aux = 0)
                                                         @foreach ($infoproduto as $infoprod)
-                                                            @php($dataValidadeI = $infoprod->dataValidade)
+                                                            @if ($prod->id == $infoprod->produtosID)
+                                                                @php($dataValidadeI = $infoprod->dataValidade)
                                                                 {{-- Se codigo barras igual --}}
-                                                                @if ($prod->id == $infoprod->idProduto)
 
-                                                                    @if ($infoprod->dataValidade = $dataValidadeI)
-                                                                        @php($aux += 1)
+                                                                    {{-- @if ($infoprod->dataValidade = $dataValidadeI)
+                                                                        @php($aux += 1) --}}
 
-                                                            <tr id="A{{ $prod->id }}" class="collapse">
-                                                                <td>{{ $aux }}</td>
-
-                                                                <td>{{ $prod->nome }}</td>
-
-                                                                <td>{{ $infoprod->idProduto }}</td>
-                                                                <td>{{ $infoprod->dataValidade }}</td>
-                                                                <td>{{ $infoprod->count() }}</td>
-                                                                <td></td>
-
-                                                            </tr>
-
-                                            @endif
-                                            @endif
-
-                                            @endforeach
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                                        {{-- @endif  --}}
+                                                                        @php($aux+=1)
+                                                                        <tr id="A{{ $prod->id }}" class="collapse">
+                                                                            <td>{{ $infoprod->dataCompra }}</td>
+                                                                            
+                                                                            <td>{{ $infoprod->dataValidade }}</td>
+                                                                            
+                                                                            <td>{{ $infoprod->precoCompra }}</td>
+                                                                            <td>{{ $infoprod->precoNormal }}</td>
+                                                                            <td>
+                                                                                @foreach ($armazens as $a)
+                                                                                    @if ($infoprod->armazemID == $a->id) 
+                                                                                        {{ $a->nome }}                                                                                   
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="{{route('categoria.edit',$infoprod)}}"><i class="fas fa-edit text-info mr-1" ></a>     
+                                                                                <a href="{{route('categoria.delete',$infoprod)}}"><i class="fas fa-trash-alt text-info mr-1"></a>
+                                                                            </td>
+                                                
+                                                                          
+                                                                            
+                                                                        </tr>
+                                                                        
+                                                                        {{-- @endif --}}
+                                                                    @endif
+                                                                @endforeach
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    </div>
 
 
 

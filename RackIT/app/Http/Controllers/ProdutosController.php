@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\armazen;
 use App\Models\produto;
 use App\Models\categoria;
 
-use App\Models\infoprodutos;
+use App\Models\info_produto;
 
 use App\Models\lista_produto;
 use Illuminate\Http\Request;
@@ -35,9 +36,9 @@ class ProdutosController extends Controller
         }
         $produto = produto::all()->where('lista_produtos_id', $teste); 
         $categoria = categoria::all();
-
-        $infoproduto = infoprodutos::all();
-        return view('produtos.index', ['produto' => $produto, 'infoproduto' => $infoproduto, 'categoria' => $categoria, 'nomedaslistas' => $nomedaslistas ]);
+        $armazens = armazen::all();
+        $infoproduto = info_produto::all();
+        return view('produtos.index', ['produto' => $produto, 'infoproduto' => $infoproduto, 'categoria' => $categoria, 'nomedaslistas' => $nomedaslistas , 'armazens' => $armazens]);
     }
 
     public function showcreate()
