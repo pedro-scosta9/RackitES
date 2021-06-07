@@ -65,6 +65,27 @@ class CreateRolesTableSeeder extends Seeder
         $role = Role::create([
             'name' => 'Premium'
         ]);
+
+        $lista = lista_produto::create([
+            'nome' => "Lista " . $user->name,
+
+        ]);
+        $user_id = $user->id;
+        //Criar listaprodutos
+        //Guardo id da lista_produtos
+        $lista_produtos_id = $lista->id;
+        //Inserir dados na users_has_listaprodutos
+        DB::insert('insert into users_has_listaprodutos (users_id,lista_produtos_id) values (?,?)', [$user_id, $lista_produtos_id]);
+
+
+        //Criar categorias default da lista (Bebidas, Carnes, Peixes, Congelados, Cereais, Frutas e Vegetais)
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Bebidas', $lista_produtos_id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Carnes', $lista_produtos_id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Peixes', $lista_produtos_id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Congelados', $lista_produtos_id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Cereais', $lista_produtos_id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Frutas', $lista_produtos_id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Vegetais', $lista_produtos_id]);
         $role->syncPermissions([3, 4, 5, 6, 7, 8]);
         $user->assignRole([$role->id]);
 
@@ -77,6 +98,27 @@ class CreateRolesTableSeeder extends Seeder
         $role = Role::create([
             'name' => 'User'
         ]);
+
+        $lista = lista_produto::create([
+            'nome' => "Lista " . $user->name,
+
+        ]);
+        $user_id = $user->id;
+        //Criar listaprodutos
+        //Guardo id da lista_produtos
+        $lista_produtos_id = $lista->id;
+        //Inserir dados na users_has_listaprodutos
+        DB::insert('insert into users_has_listaprodutos (users_id,lista_produtos_id) values (?,?)', [$user_id, $lista_produtos_id]);
+
+
+        //Criar categorias default da lista (Bebidas, Carnes, Peixes, Congelados, Cereais, Frutas e Vegetais)
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Bebidas', $lista_produtos_id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Carnes', $lista_produtos_id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Peixes', $lista_produtos_id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Congelados', $lista_produtos_id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Cereais', $lista_produtos_id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Frutas', $lista_produtos_id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Vegetais', $lista_produtos_id]);
         $role->syncPermissions([5, 6, 7, 8]);
         $user->assignRole([$role->id]);
     }
