@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 @section('content')
     <div class="row">
@@ -14,7 +15,7 @@
             <p>{{message}}</p>
         </div>
     @endif
-    <table class="table table-bordered">
+    <table id="users" class="table table-bordered">
         <tr>
             <th>Nº</th>
             <th>Nome</th>
@@ -40,7 +41,15 @@
             <td>
                 @if(!empty($user->getRoleNames()))
                 @foreach ($user->getRoleNames() as $r)
+                    @if ($r == "User") 
+                    <label class="badge badge-primary">{{$r}}​​​​​​​</label>
+                    @elseif ($r == "Admin") 
+                    <label class="badge badge-danger">{{$r}}​​​​​​​</label>
+                    @elseif ($r == "Premium") 
                     <label class="badge badge-success">{{$r}}​​​​​​​</label>
+                    @else
+                    <label class="badge badge-light">{{$r}}​​​​​​​</label> 
+                    @endif
                 @endforeach
                 @endif
             </td>
@@ -56,4 +65,15 @@
         @endforeach
     </table>
     {!! $data->render()!!}
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function () {
+        $('#users').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+        });
+
+    </script> --}}
+
 @endsection
