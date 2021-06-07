@@ -9,6 +9,7 @@ use App\Models\categoria;
 use App\Models\info_produto;
 
 use App\Models\lista_produto;
+use App\Models\produtos_has_categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -32,13 +33,14 @@ class ProdutosController extends Controller
             }
         }
         $produto = produto::all()->where('lista_produtos_id', $teste);
-        $categoria = categoria::all();
-        $armazens = armazen::all();
+        $categoria = categoria::all()->where('lista_produtos_id', $teste);
+        $armazens = armazen::all()->where('lista_produtos_id', $teste);
         $infoproduto = info_produto::all();
-        return view('produtos.index', ['produto' => $produto, 'infoproduto' => $infoproduto, 'categoria' => $categoria, 'nomedaslistas' => $nomedaslistas, 'armazens' => $armazens]);
+        $produtosCategorias = produtos_has_categoria::all()->where('lista_produtos_id', $teste);
+        return view('produtos.index', ['produto' => $produto, 'infoproduto' => $infoproduto, 'categoria' => $categoria, 'nomedaslistas' => $nomedaslistas, 'armazens' => $armazens, 'produtosCategorias' => $produtosCategorias]);
     }
 
-    public function showcreate()
+    public function showcreate(Request $request)
     {
         $nomeProdutos = DB::select("select produtos.nome, produtos.id from produtos inner join lista_produtos on lista_produtos.id = produtos.lista_produtos_id where produtos.lista_produtos_id=?", [1]);
         $nomeCategoria = DB::select("select categorias.nome,categorias.id from categorias inner join lista_produtos on lista_produtos.id = categorias.lista_produtos_id where lista_produtos_id=?", [1]);
@@ -48,7 +50,22 @@ class ProdutosController extends Controller
     public function createInfoProd(Request $request)
     {
         $infoproduto = new info_produto();
-        $infoproduto->produtosID = produto::find($request->nome);
+        $auxprodutoID = DB::select("select produtos.id from produtos where nome=?", [$request->nome]);
+        $auxarmazemID = DB::select("select armazens.id from armazens where nome=?", [$request->armazem]);
+        foreach ($auxprodutoID as $aux) {
+            $idaux = $aux->id;
+            break;
+        }
+        foreach ($auxarmazemID as $aux) {
+            $idArmazemAUX = $aux->id;
+            break;
+        }
+        $infoproduto->produtosID = $idaux;
+        $infoproduto->armazemID = $idArmazemAUX;
+        $infoproduto->dataCompra = $request->dataCompra;
+        $infoproduto->dataValidade = $request->dataValidade;
+        $infoproduto->precoCompra = $request->precoCompra;
+        $infoproduto->precoNormal = $request->precoNormal;
         $infoproduto->save();
         return redirect()->route('produtos.index');
     }

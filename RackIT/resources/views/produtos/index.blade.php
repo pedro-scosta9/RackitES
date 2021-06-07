@@ -4,6 +4,9 @@
 @section('content')
 <div class="row">
     <div class="col-10">
+    <form method="POST" action="{{ route('produtos.index') }}">
+        @csrf
+
         <select class="form-select" size="1" name="SelectListaProdutos">
             @foreach($nomedaslistas as $listas)
             <option values="{{$listas->id}}">{{$listas ->nome}}</option>
@@ -11,7 +14,9 @@
             @endforeach
             {{-- {!! Form::select('size', array($nomedaslistas->id => $nomedaslistas->nome)) !!} --}}
         </select>
-    </div>
+    </form>
+</div>
+
     <div class="col-2" ><a href="{{ route('produtos.index') }}" type="button" class="mt-0 mb-0 btn btn-primary">Atualizar Lista</a></div>
 </div>
 
@@ -22,8 +27,13 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head> --}}
-    <a href="{{ route('produtos.inserir') }}" type="button" class="mt-4 mb-4 btn btn-primary">Inserir Produtos</a>
-
+    <div class="row">
+        <div class="col-3 pr-0">
+            <a href="{{ route('produtos.inserir') }}" type="button" class="mt-4 mb-4 btn btn-primary">Adicionar Novo Produto</a>
+        </div>
+        <div class="col-2 pl-0">
+            <a href="{{ route('produtos.inserir') }}" type="button" class="mt-4 mb-4 btn btn-primary">Adicionar Produto</a>
+        </div>
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
@@ -33,8 +43,8 @@
                             <th>Codigo Barras</th>
                             <th>Nome</th>
                             <th>Quantidade</th>
-                            <th>Categoria</th>
-
+                            <th>Informações do Produto</th>
+                            <th>Adicionar produto</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,20 +68,23 @@
                                         {{-- <td>{{ $infoprod->idProduto }}</td> --}}
                                         <td>{{ $val }}</td>
                                         {{-- Verifico a categoria --}}
-                                        @foreach ($categoria as $cat)
-                                            @if ($cat->id == $prod->idCategoria)
-                                                <td>{{ $cat->nome }}</td>
+                                        </td>
+                                        <td> @foreach ($produtosCategorias as $cat)
+                                        @if ($cat->produtos_id == $prod->idCategoria)
+                                            {{ $cat->id }}
+                                        
+                                        </td>
 
 
-                                            @endif
-                                        @endforeach
-                                        <td><i class="fa fa-plus text-primary" aria-hidden="true">Ver mais</i></td>
+                                        @endif
+                                    @endforeach</td>
+                                    <td><a href="{{ route('produtos.inserir') }}" type="button" class="btn btn-primary font-weight-bold w-100"><i class="fa fa-plus" aria-hidden="true"> </i>  Adicionar {{$prod->nome}}</a>
 
                                     </tr>
 
 
                                     {{-- Para cada produto, crio uma nova tabela com as informações de cada produto --}}
-                                    <td colspan="4" id="A{{ $prod->id }}" class="collapse table table-bordered table-condensed">
+                                    <td colspan="5" id="A{{ $prod->id }}" class="collapse table table-bordered table-condensed">
                                         <table class="table">
                                             <thead>
                                                 <tr>

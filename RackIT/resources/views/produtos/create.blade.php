@@ -21,7 +21,7 @@
                     </select>                    
                 </div>
             </div>
-            <div class="col-md-12" >
+            {{-- <div class="col-md-12" >
                 <div class="form-group">
                     <label for="nome">Categoria</label>
                     <select class="form-select" size="1" name="categoria">
@@ -30,7 +30,39 @@
                         @endforeach
                     </select>                    
                 </div>
+            </div> --}}
+            
+            {{-- <div class="col-md-12" >
+                <div class="form-group">
+                    <label for="nome">Codigo Barras</label>
+                    <input type="number" name="codigoBarras" id="codigoBarras" class="form-control">
+                </div>
+            </div> --}}
+            <div class="col-md-12" >
+                <div class="form-group">
+                    <label for="nome">Data de Compra</label>
+                    <input type="date"  name="dataCompra" id="nome" class="form-control">
+                </div>
             </div>
+            <div class="col-md-12" >
+                <div class="form-group">
+                    <label for="nome">Data de Validade</label>
+                    <input type="date"  name="dataValidade" id="nome" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-12" >
+                <div class="form-group">
+                    <label for="nome">Preço de Compra</label>
+                    <input type="decimal" name="precoCompra" id="nome" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-12" >
+                <div class="form-group">
+                    <label for="nome">Preço Normal</label>
+                    <input type="decimal"  name="precoNormal" id="nome" class="form-control">
+                </div>
+            </div>
+            
             <div class="col-md-12" >
                 <div class="form-group">
                     <label for="nome">Armazenado</label>
@@ -41,42 +73,11 @@
                     </select>                    
                 </div>
             </div>
-
-            <div class="col-md-12" >
-                <div class="form-group">
-                    <label for="nome">Codigo Barras</label>
-                    <input type="number" required name="codigoBarras" id="codigoBarras" class="form-control">
-                </div>
-            </div>
-            <div class="col-md-12" >
-                <div class="form-group">
-                    <label for="nome">Data de Compra</label>
-                    <input type="date" required name="dataCompra" id="nome" class="form-control">
-                </div>
-            </div>
-            <div class="col-md-12" >
-                <div class="form-group">
-                    <label for="nome">Data de Validade</label>
-                    <input type="date" required name="dataValidade" id="nome" class="form-control">
-                </div>
-            </div>
-            <div class="col-md-12" >
-                <div class="form-group">
-                    <label for="nome">Preço de Compra</label>
-                    <input type="decimal" required name="precoCompra" id="nome" class="form-control">
-                </div>
-            </div>
-            <div class="col-md-12" >
-                <div class="form-group">
-                    <label for="nome">Preço Normal</label>
-                    <input type="decimal" required name="precoNormal" id="nome" class="form-control">
-                </div>
-            </div>
-
         </div>
         <div class="row">
             <button type="submit" class="mt-4 mb-4 btn btn-primary">Enviar</button>
         </div>
-
+        
     </form>
-@endsection
+    @endsection
+    

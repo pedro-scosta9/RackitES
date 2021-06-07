@@ -129,6 +129,11 @@ class CreateRolesTableSeeder extends Seeder
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Cereais', $lista_produtos_id]);
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Frutas', $lista_produtos_id]);
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Vegetais', $lista_produtos_id]);
+
+        DB::insert('insert into users_has_listaprodutos (users_id,lista_produtos_id) values (1,2)');
+        DB::insert('insert into users_has_listaprodutos (users_id,lista_produtos_id) values (1,3)');
+
+
         $role->syncPermissions([5, 6, 7, 8]);
         $user->assignRole([$role->id]);
     }
