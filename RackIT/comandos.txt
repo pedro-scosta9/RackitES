@@ -7,5 +7,6 @@ php artisan db:seed --class=CreateRolesTableSeeder
 php artisan db:seed --class=AdminUserTableSeeder
 php artisan db:seed --class=PermissionTableSeeder
 php artisan db:seed --class=PremiumTableSeeder
+php artisan make:migration create_categorias_table
 
 php artisan migrate:refresh
