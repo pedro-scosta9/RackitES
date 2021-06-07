@@ -15,55 +15,69 @@
             <p>{{message}}</p>
         </div>
     @endif
-    <table id="users" class="table table-bordered">
-        <tr>
-            <th>Nº</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Papel</th>
-            <th></th>
-            </tr>
-        @foreach ($data as $key=>$user)
-        <tr>
-            <td>{{++$i}}</td>
-            <td>{{$user->name}}</td>
-            <td>{{$user->email}}</td>
-            {{-- <td>
-                
-            @if(!@empty($user->getRoleNames()))
-                    @foreach ($user->getRoleNames() as $r)
-                    <label class="badge badge-sucess">{{$r}}</label>
-                    @endforeach 
-                @endif
-            </td>  --}}
-            
-        
-            <td>
-                @if(!empty($user->getRoleNames()))
-                @foreach ($user->getRoleNames() as $r)
-                    @if ($r == "User") 
-                    <label class="badge badge-primary">{{$r}}​​​​​​​</label>
-                    @elseif ($r == "Admin") 
-                    <label class="badge badge-danger">{{$r}}​​​​​​​</label>
-                    @elseif ($r == "Premium") 
-                    <label class="badge badge-success">{{$r}}​​​​​​​</label>
-                    @else
-                    <label class="badge badge-light">{{$r}}​​​​​​​</label> 
-                    @endif
-                @endforeach
-                @endif
-            </td>
-        
-            
-            <td>
-                <a class='btn btn-info' href="{{route('users.show',$user->id)}}">Ver</a>
-                <a class='btn btn-primary' href="{{route('users.edit',$user->id)}}">Editar</a>
-                {!!Form::open(['method'=>'DELETE','route'=>['users.destroy',$user->id],'style'=>'display:inline'])!!}
-                {!!Form::submit('Remover',['class'=>'btn btn-danger'])!!}
-            </td>
-        </tr>
-        @endforeach
-    </table>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="teste" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Nº</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Papel</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($data as $key=>$user)
+                        <tr>
+                            <td>{{$user->id}}</td>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->email}}</td>            
+                        
+                            <td>
+                                @if(!empty($user->getRoleNames()))
+                                @foreach ($user->getRoleNames() as $r)
+                                    @if ($r == "User") 
+                                    <label class="badge badge-primary">{{$r}}​​​​​​​</label>
+                                    @elseif ($r == "Admin") 
+                                    <label class="badge badge-danger">{{$r}}​​​​​​​</label>
+                                    @elseif ($r == "Premium") 
+                                    <label class="badge badge-success">{{$r}}​​​​​​​</label>
+                                    @else
+                                    <label class="badge badge-light">{{$r}}​​​​​​​</label> 
+                                    @endif
+                                @endforeach
+                                @endif
+                            </td>
+                            <td>
+                                <a class='btn btn-info' href="{{route('users.show',$user->id)}}">Ver</a>
+                                <a class='btn btn-primary' href="{{route('users.edit',$user->id)}}">Editar</a>
+                                {!!Form::open(['method'=>'DELETE','route'=>['users.destroy',$user->id],'style'=>'display:inline'])!!}
+                                {!!Form::submit('Remover',['class'=>'btn btn-danger'])!!}
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $('#teste').DataTable({
+      "aaSorting": [],
+      columnDefs: [{
+      orderable: false,
+      targets: 4
+      }]
+    });
+        })
+    </script>
+
+
     {!! $data->render()!!}
         {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
