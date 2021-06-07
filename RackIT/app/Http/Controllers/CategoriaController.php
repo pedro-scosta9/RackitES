@@ -21,6 +21,8 @@ class CategoriaController extends Controller
 
 
 
+
+
         $input = $request->all();
         if (!empty($input['SelectListaProdutos'])) {
             $teste = $request->SelectListaProdutos;
