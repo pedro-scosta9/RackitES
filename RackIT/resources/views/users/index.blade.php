@@ -1,5 +1,6 @@
 
 @extends('layouts.app')
+
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -16,17 +17,17 @@
         </div>
     @endif
 
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4" >
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="teste" width="100%">
+                <table class="table table-bordered table-sm" id="teste" width="100%" >
                     <thead>
                         <tr>
-                            <th>Nº</th>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>Papel</th>
-                            <th></th>
+                            <th class="th-sm">Nº</th>
+                            <th class="th-sm">Nome</th>
+                            <th class="th-sm">Email</th>
+                            <th class="th-sm">Papel</th>
+                            <th class="th-sm"></th>
                         </tr>
                     </thead>
                     <tbody>
