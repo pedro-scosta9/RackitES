@@ -43,7 +43,8 @@ class ProdutosController extends Controller
 
     public function showcreate()
     {
-        return view('produtos.create');
+        $nomeProdutos = DB::select("select * from produtos inner join lista_produtos on produtos.lista_produtos_id = lista_produtos.id");
+        return view('produtos.create',['nomeProdutos' => $nomeProdutos]);
     }
     public function create(Request $request)
     {
