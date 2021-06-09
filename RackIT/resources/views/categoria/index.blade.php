@@ -36,8 +36,9 @@
                             <tr>
                                 <td>{{ $cat->id }}</td>
                                 <td>{{ $cat->nome }}</td>
-                                <td><a href="{{route('categoria.edit',$cat)}}"><i class="fas fa-edit text-info mr-1" ></a></td>
-                                <td><a href="{{route('categoria.delete',$cat)}}"><i class="fas fa-trash-alt text-info mr-1"></a></td>
+                                <td><a href="{{ route('categoria.edit',$cat) }}" type="button" class="btn btn-success font-weight-bold w-100"><i class="fa fa-edit" aria-hidden="true"> </i>  Editar</a></td>
+                                <td><a href="{{ route('categoria.delete',$cat) }}" type="button" class="btn btn-danger font-weight-bold w-100"><i class="fa fa-trash" aria-hidden="true"> </i>  Apagar</a></td>
+
 
                             </tr>
                         @endforeach

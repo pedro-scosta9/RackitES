@@ -53,9 +53,11 @@ class CreateRolesTableSeeder extends Seeder
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Cereais', $lista_produtos_id]);
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Frutas', $lista_produtos_id]);
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Vegetais', $lista_produtos_id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Outros', $lista_produtos_id]);
 
         DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Frigorifico", "Frio", "", 1, NULL, NULL)');
         DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Garagem", "Carro", "", "1", NULL, NULL)');
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Cozinha", "", "", "1", NULL, NULL)');
 
         DB::insert('INSERT INTO produtos (id, nome, codigoBarras, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Iogurte", 123, 1, "2021-06-07 17:46:23", "2021-06-07 17:46:23")');
         DB::insert('INSERT INTO produtos (id, nome, codigoBarras, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Pneu", 12345642, 1, "2021-06-07 17:46:51", NULL)');
@@ -63,8 +65,12 @@ class CreateRolesTableSeeder extends Seeder
 
         DB::insert('INSERT INTO info_produtos (id, dataCompra, dataValidade, precoCompra, precoNormal, produtosID, armazemID, created_at, updated_at) VALUES (NULL, "2021-06-02", "2021-06-10", 1.54, 1.99, 1, 1, NULL, NULL)');
         DB::insert('INSERT INTO info_produtos (id, dataCompra, dataValidade, precoCompra, precoNormal, produtosID, armazemID, created_at, updated_at) VALUES (NULL, "2021-05-05", "2021-05-06", 1.54, 1.99, 1, 1, NULL, NULL)');
+        DB::insert('INSERT INTO info_produtos (id, dataCompra, dataValidade, precoCompra, precoNormal, produtosID, armazemID, created_at, updated_at) VALUES (NULL, "2021-05-05", "2021-05-06", 50, 75, 2, 2, NULL, NULL)');
+        DB::insert('INSERT INTO info_produtos (id, dataCompra, dataValidade, precoCompra, precoNormal, produtosID, armazemID, created_at, updated_at) VALUES (NULL, "2021-05-05", "2021-05-06", 50, 75, 3, 3, NULL, NULL)');
 
-
+        DB::insert('insert into produtos_has_categorias (produtos_id,categorias_id) values (1,1)');
+        DB::insert('insert into produtos_has_categorias (produtos_id,categorias_id) values (2,8)');
+        DB::insert('insert into produtos_has_categorias (produtos_id,categorias_id) values (3,5)');
 
         //Premium User + Role
         $user = User::create([

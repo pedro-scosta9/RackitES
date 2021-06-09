@@ -78,7 +78,7 @@ class RegisterController extends Controller
         $user->assignRole('User');
         //Guardo id do user
         $user_id = $user->id;
-        
+
         //Criar listaprodutos
         $lista = lista_produto::create([
             'nome' => "Lista " . $data['name'],
@@ -99,6 +99,12 @@ class RegisterController extends Controller
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Frutas', $lista_produtos_id]);
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Vegetais', $lista_produtos_id]);
 
+
+
+        //Criar armazens default na listaProdutos 
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Frigorifico", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Garagem", "", "", "?", NULL, NULL)', [$lista_produtos_id]);
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Cozinha", "", "", "?", NULL, NULL)', [$lista_produtos_id]);
         //$user->assignRole(Role::where('name','User'));
         return $user;
     }

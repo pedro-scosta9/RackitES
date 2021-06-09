@@ -28,11 +28,11 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head> --}}
     <div class="row">
-        <div class="col-3 pr-0">
-            <a href="{{ route('produtos.inserir') }}" type="button" class="mt-4 mb-4 btn btn-primary">Adicionar Novo Produto</a>
+        <div class="col-6">
+            <a href="{{ route('produtos.inserirnovo') }}" type="button" class="mt-4 mb-4 btn btn-success w-100">Adicionar Novo Produto</a>
         </div>
-        <div class="col-2 pl-0">
-            <a href="{{ route('produtos.inserir') }}" type="button" class="mt-4 mb-4 btn btn-primary">Adicionar Produto</a>
+        <div class="col-6">
+            <a href="{{ route('produtos.inserir') }}" type="button" class="mt-4 mb-4 btn btn-primary w-100">Adicionar Produto Existente</a>
         </div>
     <div class="card shadow mb-4">
         <div class="card-body">
@@ -43,8 +43,11 @@
                             <th>Codigo Barras</th>
                             <th>Nome</th>
                             <th>Quantidade</th>
-                            <th>Informações do Produto</th>
-                            <th>Adicionar produto</th>
+                            <th>Categorias</th>
+                            <th>Adicionar</th>
+                            <th>Editar</th>
+                            <th>Remover todos</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -67,24 +70,18 @@
                                         <td>{{ $prod->nome }}</td>
                                         {{-- <td>{{ $infoprod->idProduto }}</td> --}}
                                         <td>{{ $val }}</td>
-                                        {{-- Verifico a categoria --}}
-                                        </td>
-                                        <td> @foreach ($produtosCategorias as $cat)
-                                        @if ($cat->produtos_id == $prod->idCategoria)
-                                            {{ $cat->id }}
-                                        
-                                        </td>
+                                        <td>{{$prod->categoria}}</td>
 
 
-                                        @endif
-                                    @endforeach</td>
-                                    <td><a href="{{ route('produtos.inserir') }}" type="button" class="btn btn-primary font-weight-bold w-100"><i class="fa fa-plus" aria-hidden="true"> </i>  Adicionar {{$prod->nome}}</a>
 
+                                    <td><a href="{{ route('produtos.inserir') }}" type="button" class="btn btn-primary font-weight-bold w-100"><i class="fa fa-plus" aria-hidden="true"> </i>  Adicionar {{$prod->nome}}</a></td>
+                                    <td><a href="{{ route('produtos.edit',$prod) }}" type="button" class="btn btn-success font-weight-bold w-100"><i class="fa fa-edit" aria-hidden="true"> </i>  Editar</a></td>
+                                    <td><a href="{{ route('produtos.delete',) }}" type="button" class="btn btn-danger font-weight-bold w-100"><i class="fa fa-trash" aria-hidden="true"> </i>  Apagar</a></td>
                                     </tr>
 
 
                                     {{-- Para cada produto, crio uma nova tabela com as informações de cada produto --}}
-                                    <td colspan="5" id="A{{ $prod->id }}" class="collapse table table-bordered table-condensed">
+                                    <td colspan="7" id="A{{ $prod->id }}" class="collapse table table-bordered table-condensed">
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -125,12 +122,8 @@
                                                                                     @endif
                                                                                 @endforeach
                                                                             </td>
-                                                                            <td>
-                                                                                <a href="{{route('categoria.edit',$infoprod)}}"><i class="fas fa-edit text-info mr-1" ></i></a>  
-                                                                            </td>
-                                                                            <td>  
-                                                                                <a href="{{route('categoria.delete',$infoprod)}}"><i class="fas fa-trash-alt text-info mr-1"></i></a>
-                                                                            </td>
+                                                                            <td><a href="{{ route('produtos.inserir') }}" type="button" class="btn btn-success font-weight-bold w-100"><i class="fa fa-edit" aria-hidden="true"> </i>  Editar</a></td>
+                                                                            <td><a href="{{ route('produtos.inserir') }}" type="button" class="btn btn-danger font-weight-bold w-100"><i class="fa fa-trash" aria-hidden="true"> </i>  Apagar</a></td>
                                                 
                                                                           
                                                                             

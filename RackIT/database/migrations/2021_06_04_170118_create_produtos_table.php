@@ -27,7 +27,8 @@ class CreateProdutosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('produtos_id');
             $table->unsignedBigInteger('categorias_id');
-            
+            $table->timestamps();
+
             //Chave estrangeira produtos_id
             $table->foreign('produtos_id')->references('id')->on('produtos')->onDelete('cascade');
 

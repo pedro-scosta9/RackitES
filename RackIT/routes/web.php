@@ -49,8 +49,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     // ROTAS PRODUTOS
     Route::get('produto/add', [ProdutosController::class, 'showcreate'])->name('produtos.inserir');
+    Route::get('produto/addnovo', [ProdutosController::class, 'showcreatenovo'])->name('produtos.inserirnovo');
     ROute::post('produto', [ProdutosController::class, 'create'])->name('produtos.insert');
-    ROute::post('produto', [ProdutosController::class, 'createInfoProd'])->name('produtos.insertInfo');
+    ROute::post('produto', [ProdutosController::class, 'createnovo'])->name('produtos.insertnovo');
+    ROute::post('produtos', [ProdutosController::class, 'createInfoProd'])->name('produtos.insertInfo');
+    ROute::post('produto', [ProdutosController::class, 'createInfoProdNovo'])->name('produtos.insertInfoNovo');
 
     ROute::get('produto/{produto}/edit', [ProdutosController::class, 'showedit'])->name('produtos.edit');
     Route::put('produto/{produto}', [ProdutosController::class, 'edit'])->name('produtos.editar');
