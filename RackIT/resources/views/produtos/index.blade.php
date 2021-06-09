@@ -32,7 +32,7 @@
             <a href="{{ route('produtos.inserirnovo') }}" type="button" class="mt-4 mb-4 btn btn-success w-100">Adicionar Novo Produto</a>
         </div>
         <div class="col-6">
-            <a href="{{ route('produtos.inserir') }}" type="button" class="mt-4 mb-4 btn btn-primary w-100">Adicionar Produto Existente</a>
+            <a href="{{ route('produtos.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary w-100">Adicionar Produto Existente</a>
         </div>
     <div class="card shadow mb-4">
         <div class="card-body">
@@ -75,8 +75,8 @@
 
 
                                     <td><a href="{{ route('produtos.inserir') }}" type="button" class="btn btn-primary font-weight-bold w-100"><i class="fa fa-plus" aria-hidden="true"> </i>  Adicionar {{$prod->nome}}</a></td>
-                                    <td><a href="{{ route('produtos.edit',$prod) }}" type="button" class="btn btn-success font-weight-bold w-100"><i class="fa fa-edit" aria-hidden="true"> </i>  Editar</a></td>
-                                    <td><a href="{{ route('produtos.delete',) }}" type="button" class="btn btn-danger font-weight-bold w-100"><i class="fa fa-trash" aria-hidden="true"> </i>  Apagar</a></td>
+                                    <td><a href="{{ route('produtos.edit',$prod->id) }}" type="button" class="btn btn-success font-weight-bold w-100"><i class="fa fa-edit" aria-hidden="true"> </i>  Editar</a></td>
+                                    <td><a href="{{ route('produtos.delete',$prod->id) }}" type="button" class="btn btn-danger font-weight-bold w-100"><i class="fa fa-trash" aria-hidden="true"> </i>  Apagar</a></td>
                                     </tr>
 
 

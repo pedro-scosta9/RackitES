@@ -149,12 +149,12 @@ class ProdutosController extends Controller
         $nomeProdutos = DB::select("select produtos.nome, produtos.id from produtos inner join lista_produtos on lista_produtos.id = produtos.lista_produtos_id where produtos.lista_produtos_id=?", [1]);
         $nomeCategoria = DB::select("select categorias.nome,categorias.id from categorias inner join lista_produtos on lista_produtos.id = categorias.lista_produtos_id where lista_produtos_id=?", [1]);
         $nomeArmazem = DB::select("select armazens.nome,armazens.id from armazens inner join lista_produtos on lista_produtos.id = armazens.lista_produtos_id where lista_produtos_id=?", [1]);
-        return view('produtos.edit', ['produto' => $produto]);
+        return view('produtos.edit', ['produto' => $produto, 'nomeProdutos' => $nomeProdutos, 'nomeCategoria' => $nomeCategoria, 'nomeArmazem' => $nomeArmazem]);
     }
 
     public function edit(Request $request, produto $produto)
     {
-        $produto = new produto();
+        // $produto = new produto();
         $produto->nome = $request->nome;
         $produto->codigoBarras = $request->codigoBarras;
         $produto->save();

@@ -58,6 +58,8 @@ Route::group(['middleware' => ['auth']], function () {
     ROute::get('produto/{produto}/edit', [ProdutosController::class, 'showedit'])->name('produtos.edit');
     Route::put('produto/{produto}', [ProdutosController::class, 'edit'])->name('produtos.editar');
 
+
+
     ROute::get('produto/{produto}/delete', [ProdutosController::class, 'delete'])->name('produtos.delete');
     Route::get('produto', [ProdutosController::class, 'index'])->name('produtos.index');
 });

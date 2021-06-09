@@ -2,18 +2,38 @@
 @section('title', 'Editar Categoria')
 @section('page', 'Editar')
 @section('content')
-
-    <form method="POST" action="{{ route('produtos.editar', $categoria) }}">
+<a href="{{ route('produtos.index') }}" type="button" class="mt-0 mb-4 btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+</a>
+    <form method="POST" action="{{ route('produtos.editar', $produto) }}">
         @csrf
         @method('put')
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="nome">Nome</label>
-                    <input type="text" required name="nome" id="nome" value="{{ $categoria->nome }}" class="form-control">
+                    <input type="text" required name="nome" id="nome" value="{{ $produto->nome }}" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-12" >
+                <div class="form-group">
+                    <label for="nome">Categoria</label>
+                    <select class="form-select" size="1" name="categoria">
+                        @foreach($nomeCategoria as $cat)
+                        <option values="{{$cat->id}}">{{$cat ->nome}}</option>
+                        @endforeach
+                    </select>                    
+                </div>
+            </div>
+            
+            <div class="col-md-12" >
+                <div class="form-group">
+                    <label for="nome">Codigo de Barras</label>
+                    <input type="text"  name="codigoBarras" id="codigoBarras" class="form-control" value="{{ $produto->codigoBarras }}">
                 </div>
             </div>
         </div>
-        <button type="submit" class="mt-4 mb-4 btn btn-primary">Enviar</button>
+            <button type="submit" class="mt-4 mb-4 btn btn-primary">Enviar</button>
     </form>
 @endsection
+
+
