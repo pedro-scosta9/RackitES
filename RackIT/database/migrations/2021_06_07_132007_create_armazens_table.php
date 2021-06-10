@@ -23,6 +23,23 @@ class CreateArmazensTable extends Migration
             
             $table->timestamps();
         });
+
+        Schema::create('produtos_has_categorias', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('produtos_id');
+            $table->unsignedBigInteger('categorias_id');
+
+ 
+
+            //Chave estrangeira produtos_id
+            $table->foreign('produtos_id')->references('id')->on('produtos')->onDelete('cascade');
+ 
+            //Chave estrangeira categorias_id
+            $table->foreign('categorias_id')->references('id')->on('categorias')->onDelete('cascade');
+
+ 
+
+        });
     }
 
     /**
