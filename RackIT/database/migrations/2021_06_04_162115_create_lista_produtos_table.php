@@ -24,6 +24,7 @@ class CreateListaProdutosTable extends Migration
             $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('lista_produtos_id');
             
+            $table-> timestamps();
             //Chave estrangeira users_id
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArmazemController;
+use App\Http\Controllers\ListaProdutosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
@@ -85,6 +86,19 @@ Route::group(['middleware' => ['auth']], function () {
  
      ROute::get('armazens/{armazens}/delete', [ArmazemController::class, 'delete'])->name('armazens.delete');
      
+     // Route::resource('listaProduto', CategoriaController::class);
+    
+        // ROTAS Listas produtos
+        Route::get('listaProduto/add', [ListaProdutosController::class, 'showcreate'])->name('listaProduto.inserir');
+        ROute::post('listaProduto', [ListaProdutosController::class, 'create'])->name('listaProduto.insert');
+    
+        // Route::post('listaProduto', [CategoriaController::class, 'refreshlista'])->name('categoria.refresh');
+    
+        ROute::get('listaProduto/{listaProduto}/edit', [ListaProdutosController::class, 'showedit'])->name('listaProduto.edit');
+        Route::put('listaProduto/{listaProduto}', [ListaProdutosController::class, 'edit'])->name('listaProduto.editar');
+    
+        ROute::get('listaProduto/{listaProduto}/delete', [ListaProdutosController::class, 'delete'])->name('listaProduto.delete');
+        Route::get('listaProduto', [ListaProdutosController::class, 'index'])->name('listaProduto.index');
 
 });
 
