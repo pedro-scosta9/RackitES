@@ -163,7 +163,7 @@
     @else
         <div class="row mt-4">
             <div class="col-12">
-                Teste
+                <h5>Por favor selecione uma <span class="text-primary">Lista de Produtos</span> para poder visualizar o conteudo desta página.</h5>
             </div>
         </div>
     @endif
