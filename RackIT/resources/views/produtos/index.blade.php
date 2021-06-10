@@ -3,21 +3,23 @@
 @section('page', 'Categorias')
 @section('content')
     <div class="row">
-        <div class="col-10">
+        <div class="col-12">
             <form method="POST" action="{{ route('produtos.index') }}">
                 @csrf
-
                 <select class="form-select" size="1" name="SelectListaProdutos" onchange="teste();" id="testingout">
-                    <option selected disabled>Escolha uma lista</option>
+                    @if (Request::path() == "produto")
+                        <option selected disabled>Escolha uma lista</option>
+                    @endif
                     @foreach ($nomedaslistas as $listas)
-                        <option value="{{ $listas->id }}">{{ $listas->nome }}</option>
+                        @if (Request::path() == "produto/$listas->id" )
+                            <option value="{{ $listas->id }}" selected>{{ $listas->nome }}</option>
+                        @else
+                            <option value="{{ $listas->id }}">{{ $listas->nome }}</option>
+                        @endif
                     @endforeach
                     {{-- {!! Form::select('size', array($nomedaslistas->id => $nomedaslistas->nome)) !!} --}}
                 </select>
             </form>
-        </div>
-        <div class="col-2">
-            <a href="{{ route('produtos.index') }}" type="button" class="mt-0 mb-0 btn btn-primary">Atualizar Lista</a>
         </div>
     </div>
 
@@ -28,6 +30,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head> --}}
+    @if (Request::path() != "produto")
     <div class="row">
         <div class="col-6">
             <a href="{{ route('produtos.inserirnovo') }}" type="button" class="mt-4 mb-4 btn btn-success w-100">Adicionar
@@ -157,6 +160,13 @@
                                 </div>
                             </div>
                         </div>
+    @else
+        <div class="row mt-4">
+            <div class="col-12">
+                Teste
+            </div>
+        </div>
+    @endif
                         <script>
                             function teste(data){
                                 var a = document.getElementById("testingout");

@@ -58,7 +58,6 @@ class ProdutosController extends Controller
         $infoproduto = info_produto::all();
         $produtosCategorias = produtos_has_categoria::all()->where('lista_produtos_id', $id);
         return view('produtos.index', ['produto' => $produto, 'infoproduto' => $infoproduto, 'nomedaslistas' => $nomedaslistas, 'armazens' => $armazens, 'produtosCategorias' => $produtosCategorias]);
-
     }
     //Pagina create produto existente
     public function showcreate(Request $request)
