@@ -175,20 +175,8 @@
                                 <a href="{{route('register')}}" class="nav-link">{{__('Register')}}</a>
                             </li>
                         @else
-                            <li>
-                                <a class="nav-link" href="{{route('users.index')}}">Gerir Utilizadores</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="{{route('roles.index')}}">Gerir Papeis</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="{{route('produtos.index')}}">Gerir Produtos</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="{{route('categoria.index')}}">Gerir Categorias</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="{{route('infopremium.index')}}">Info Premium</a>
+
+                                <a class="nav-link" href="{{route('home')}}">Dashboard</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -207,8 +195,8 @@
                     </nav>
 
 <main>
-  <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-    <div class="col-md-5 p-lg-5 mx-auto my-5">
+  <div class="position-relative overflow-hidden p-3 p-md-6 m-md-3 text-center bg-light" style="margin: 14rem !important;">
+    <div class="col-md-10 p-lg-5 mx-auto my-5">
       <h1 class="display-4 fw-normal">RackIT</h1>
       <p class="lead fw-normal">A RackIT é um sistema de gestão de inventario doméstico feito para facilitar a vida do
 utilizador. </p>
@@ -218,7 +206,7 @@ utilizador. </p>
     <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
   </div>
 
-  <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+  {{-- <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
     <div class="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
       <div class="my-3 py-3">
         <h2 class="display-5">Colocar imagem</h2>
@@ -233,7 +221,7 @@ utilizador. </p>
       </div>
       <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
     </div>
-  </div>
+  </div> --}}
 
   
 
