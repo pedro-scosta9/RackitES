@@ -4,16 +4,24 @@
 @section('content')
 
 <div class="row">
-    <div class="col-10">
-        <select class="form-select" size="1" name="SelectListaProdutos">
-            @foreach($nomedaslistas as $listas)
-            <option values="{{$listas->id}}">{{$listas ->nome}}</option> 
-            
-            @endforeach
-            {{-- {!! Form::select('size', array($nomedaslistas->id => $nomedaslistas->nome)) !!} --}}
-        </select>
+    <div class="col-12">
+        <form method="POST" action="{{ route('armazens.index') }}">
+            @csrf
+            <select class="form-select" size="1" name="SelectListaProdutos" onchange="teste();" id="testingout">
+                @if (Request::path() == "armazens")
+                    <option selected disabled>Escolha uma lista</option>
+                @endif
+                @foreach ($nomedaslistas as $listas)
+                    @if (Request::path() == "armazens/$listas->id" )
+                        <option value="{{ $listas->id }}" selected>{{ $listas->nome }}</option>
+                    @else
+                        <option value="{{ $listas->id }}">{{ $listas->nome }}</option>
+                    @endif
+                @endforeach
+                {{-- {!! Form::select('size', array($nomedaslistas->id => $nomedaslistas->nome)) !!} --}}
+            </select>
+        </form>
     </div>
-    <div class="col-2" ><a href="{{ route('armazens.index') }}" type="button" class="mt-0 mb-0 btn btn-primary">Atualizar Lista</a></div>
 </div>
 {{-- {{$teste}} --}}
 <br>
@@ -47,6 +55,16 @@
             </div>
         </div>
     </div>
+    <script>
+        function teste(data){
+            var a = document.getElementById("testingout");
+            console.log(a.value);
+            var pass = a.value
+            var url = '{{ route("armazens.teste", ":pass") }}';
+            url = url.replace(':pass', pass);
+            window.location.href=url;
+        }
+    </script>
 @endsection
 {{-- @foreach ($produtos as $produto)
     <hr>

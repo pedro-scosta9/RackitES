@@ -13,6 +13,7 @@
                     @foreach ($nomedaslistas as $listas)
                         @if (Request::path() == "produto/$listas->id" )
                             <option value="{{ $listas->id }}" selected>{{ $listas->nome }}</option>
+                            @php($page = $listas->id)
                         @else
                             <option value="{{ $listas->id }}">{{ $listas->nome }}</option>
                         @endif
@@ -33,11 +34,11 @@
     @if (Request::path() != "produto")
     <div class="row">
         <div class="col-6">
-            <a href="{{ route('produtos.inserirnovo') }}" type="button" class="mt-4 mb-4 btn btn-success w-100">Adicionar
+            <a href="{{ route('produtos.inserirnovo', $page) }}" type="button" class="mt-4 mb-4 btn btn-success w-100">Adicionar
                 Novo Produto</a>
         </div>
         <div class="col-6">
-            <a href="{{ route('produtos.inserir') }}" type="button" class="mt-4 mb-4 btn btn-primary w-100">Adicionar
+            <a href="{{ route('produtos.inserir', $page) }}" type="button" class="mt-4 mb-4 btn btn-primary w-100">Adicionar
                 Produto Existente</a>
         </div>
         <div class="card shadow mb-4">
@@ -79,14 +80,13 @@
                                             <td>{{ $prod->categoria }}</td>
 
 
-
-                                            <td><a href="{{ route('produtos.inserir') }}" type="button"
+                                            <td><a href="{{ route('produtos.inserir', $page) }}" type="button"
                                                     class="btn btn-primary font-weight-bold w-100"><i class="fa fa-plus"
                                                         aria-hidden="true"> </i> Adicionar</a></td>
-                                            <td><a href="{{ route('produtos.edit', $prod->id) }}" type="button"
+                                            <td><a href="{{ route('produtos.edit', [$prod->id, $page]) }}" type="button"
                                                     class="btn btn-success font-weight-bold w-100"><i class="fa fa-edit"
                                                         aria-hidden="true"> </i> Editar</a></td>
-                                            <td><a href="{{ route('produtos.delete', $prod->id) }}" type="button"
+                                            <td><a href="{{ route('produtos.delete', [$prod->id, $page]) }}" type="button"
                                                     class="btn btn-danger font-weight-bold w-100"><i class="fa fa-trash"
                                                         aria-hidden="true"> </i> Apagar</a></td>
                                         </tr>
@@ -135,7 +135,7 @@
                                                                             @endif
                                                                         @endforeach
                                                                     </td>
-                                                                    <td><a href="{{ route('produtos.editinfo', $infoprod->id) }}"
+                                                                    <td><a href="{{ route('produtos.editinfo', [$infoprod->id, $page]) }}"
                                                                             type="button" class="text-success font-weight-bold w-100"><i
                                                                                 class="fa fa-edit" aria-hidden="true"> </i> Editar</a></td>
                                                                     <td><a href="{{ route('produtos.deleteinfo', $infoprod->id) }}"

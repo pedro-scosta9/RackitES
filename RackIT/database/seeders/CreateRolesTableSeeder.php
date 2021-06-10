@@ -105,6 +105,7 @@ class CreateRolesTableSeeder extends Seeder
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Cereais', $lista_produtos_id]);
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Frutas', $lista_produtos_id]);
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Vegetais', $lista_produtos_id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Outros', $lista_produtos_id]);
 
         $role->syncPermissions([9,10,11,12,13,14,15,16,17,18,19,20]);
         $user->assignRole([$role->id]);
@@ -141,6 +142,7 @@ class CreateRolesTableSeeder extends Seeder
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Cereais', $lista_produtos_id]);
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Frutas', $lista_produtos_id]);
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Vegetais', $lista_produtos_id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Outros', $lista_produtos_id]);
 
         DB::insert('insert into users_has_listaprodutos (users_id,lista_produtos_id) values (1,2)');
         DB::insert('insert into users_has_listaprodutos (users_id,lista_produtos_id) values (1,3)');

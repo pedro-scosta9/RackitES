@@ -24,12 +24,6 @@ class CategoriaController extends Controller
         $userid = Auth::user()->id;
         // $nomedaslistas = DB::select("select * from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
         $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
-
-
-
-
-
-
         $input = $request->all();
         if (!empty($input['SelectListaProdutos'])) {
             $teste = $request->SelectListaProdutos;
@@ -39,16 +33,16 @@ class CategoriaController extends Controller
                 break;
             }
         }
-        $categoria = categoria::all()->where('lista_produtos_id', $teste);
+        $categoria = [];
         return view('categoria.index', ['categoria' => $categoria, 'nomedaslistas' => $nomedaslistas]);
     }
-    public function refreshlista(Request $request)
+    public function getList($id)
     {
         $userid = Auth::user()->id;
         $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
-        $listaid = $request->SelectListaProdutos;
-        $categoria = categoria::all()->where('lista_produtos_id', $listaid);
-        return view('categoria.refresh', ['categoria' => $categoria, 'nomedaslistas' => $nomedaslistas]);
+
+        $categoria = categoria::all()->where('lista_produtos_id', $id);
+        return view('categoria.index', ['categoria' => $categoria, 'nomedaslistas' => $nomedaslistas]);
     }
 
     public function showcreate()

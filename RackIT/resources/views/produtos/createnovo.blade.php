@@ -7,10 +7,10 @@
 {{-- <div class="row">  
         <a href="{{ route('produtos.index') }}" type="button" class="mt-0 mb-0 btn btn-primary">Introduzir um novo produto</a>
 </div> --}}
-<a href="{{ route('produtos.index') }}" type="button" class="mt-0 mb-4 btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+<a href="{{ route('produtos.teste',$id) }}" type="button" class="mt-0 mb-4 btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
 </a>
 <h1>Inserir novo produto</h1>
-    <form method="POST" action="{{ route('produtos.insertInfoNovo') }}">
+    <form method="POST" action="{{ route('produtos.insertInfoNovo', $id) }}">
         @csrf
         
         <div class="row">
@@ -19,7 +19,7 @@
                     <label for="nome">Lista Produtos</label>
                     <select class="form-select" size="1" name="lista">
                         @foreach($nomedaslistas as $listas)
-                            <option values="{{$listas->id}}">{{$listas ->nome}}</option>
+                            <option values="{{$listas->id}}" selected>{{$listas ->nome}}</option>
                         @endforeach
                     </select>                    
                 </div>

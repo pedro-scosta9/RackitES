@@ -3,14 +3,14 @@
 @section('page', 'Criar')
 @section('content')
 
-<a href="{{ route('produtos.index') }}" type="button" class="mt-0 mb-4 btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+<a href="{{ route('produtos.teste',$id) }}" type="button" class="mt-0 mb-4 btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
 </a>
 <h1>Inserir produto existente</h1>
 {{-- <div class="row">  
         <a href="{{ route('produtos.index') }}" type="button" class="mt-0 mb-0 btn btn-primary">Introduzir um novo produto</a>
 </div> --}}
 {{-- <br> --}}
-    <form method="POST" action="{{ route('produtos.insertInfo') }}">
+    <form method="POST" action="{{ route('produtos.insertInfo', $id) }}">
         @csrf
         <div class="row">
             <div class="col-md-12" >

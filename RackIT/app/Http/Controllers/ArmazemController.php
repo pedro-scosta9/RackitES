@@ -22,11 +22,6 @@ class ArmazemController extends Controller
         // $nomedaslistas = DB::select("select * from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
         $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
 
-
-
-
-
-
         $input = $request->all();
         if (!empty($input['SelectListaProdutos'])) {
             $teste = $request->SelectListaProdutos;
@@ -36,15 +31,18 @@ class ArmazemController extends Controller
                 break;
             }
         }
-        $armazens = armazen::all()->where('lista_produtos_id', $teste);
+        $armazens = [];
         return view('armazens.index', ['armazens' => $armazens, 'nomedaslistas' => $nomedaslistas]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function getList($id)
+    {
+        $userid = Auth::user()->id;
+        $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
+
+        $armazens = armazen::all()->where('lista_produtos_id', $id);
+        return view('armazens.index', ['armazens' => $armazens, 'nomedaslistas' => $nomedaslistas]);
+    }
     public function showcreate()
     {
         $userid = Auth::user()->id;
