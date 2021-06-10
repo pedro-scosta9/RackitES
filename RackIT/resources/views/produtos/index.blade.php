@@ -44,9 +44,9 @@
                             <th>Nome</th>
                             <th>Quantidade</th>
                             <th>Categorias</th>
-                            <th>Adicionar</th>
-                            <th>Editar</th>
-                            <th>Remover todos</th>
+                            <th>Adicionar Produto</th>
+                            <th>Editar Produto</th>
+                            <th>Apagar Produto</th>
 
                         </tr>
                     </thead>
@@ -74,7 +74,7 @@
 
 
 
-                                    <td><a href="{{ route('produtos.inserir') }}" type="button" class="btn btn-primary font-weight-bold w-100"><i class="fa fa-plus" aria-hidden="true"> </i>  Adicionar {{$prod->nome}}</a></td>
+                                    <td><a href="{{ route('produtos.inserir') }}" type="button" class="btn btn-primary font-weight-bold w-100"><i class="fa fa-plus" aria-hidden="true"> </i>  Adicionar</a></td>
                                     <td><a href="{{ route('produtos.edit',$prod->id) }}" type="button" class="btn btn-success font-weight-bold w-100"><i class="fa fa-edit" aria-hidden="true"> </i>  Editar</a></td>
                                     <td><a href="{{ route('produtos.delete',$prod->id) }}" type="button" class="btn btn-danger font-weight-bold w-100"><i class="fa fa-trash" aria-hidden="true"> </i>  Apagar</a></td>
                                     </tr>
@@ -90,8 +90,8 @@
                                                     <th>Preço de Compra</th>
                                                     <th>Preço Normal</th>
                                                     <th>Armazenado</th>
-                                                    <th>Editar</th>
-                                                    <th>Apagar</th>
+                                                    <th></th>
+                                                    <th></th>
 
                                                 </tr>
                                             </thead>
@@ -122,8 +122,8 @@
                                                                                     @endif
                                                                                 @endforeach
                                                                             </td>
-                                                                            <td><a href="{{ route('produtos.inserir') }}" type="button" class="btn btn-success font-weight-bold w-100"><i class="fa fa-edit" aria-hidden="true"> </i>  Editar</a></td>
-                                                                            <td><a href="{{ route('produtos.inserir') }}" type="button" class="btn btn-danger font-weight-bold w-100"><i class="fa fa-trash" aria-hidden="true"> </i>  Apagar</a></td>
+                                                                            <td><a href="{{ route('produtos.editinfo',$infoprod->id) }}" type="button" class="text-success font-weight-bold w-100"><i class="fa fa-edit" aria-hidden="true"> </i>  Editar</a></td>
+                                                                            <td><a href="{{ route('produtos.deleteinfo',$infoprod->id) }}" type="button" class="text-danger font-weight-bold w-100"><i class="fa fa-trash" aria-hidden="true"> </i>  Apagar</a></td>
                                                 
                                                                           
                                                                             

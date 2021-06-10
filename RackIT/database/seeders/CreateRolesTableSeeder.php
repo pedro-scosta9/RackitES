@@ -72,6 +72,9 @@ class CreateRolesTableSeeder extends Seeder
         DB::insert('insert into produtos_has_categorias (produtos_id,categorias_id) values (2,8)');
         DB::insert('insert into produtos_has_categorias (produtos_id,categorias_id) values (3,5)');
 
+
+
+
         //Premium User + Role
         $user = User::create([
             'name' => "Premium",
@@ -104,6 +107,7 @@ class CreateRolesTableSeeder extends Seeder
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Vegetais', $lista_produtos_id]);
         $role->syncPermissions([3, 4, 5, 6, 7, 8]);
         $user->assignRole([$role->id]);
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Frigorifico", "Frio", "", 2, NULL, NULL)');
 
         //User + User Role
         $user = User::create([

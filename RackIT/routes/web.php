@@ -58,9 +58,12 @@ Route::group(['middleware' => ['auth']], function () {
     ROute::get('produto/{produto}/edit', [ProdutosController::class, 'showedit'])->name('produtos.edit');
     Route::put('produto/{produto}', [ProdutosController::class, 'edit'])->name('produtos.editar');
 
-
+    ROute::get('produto/{infoprod}/edit-info', [ProdutosController::class, 'showeditinfo'])->name('produtos.editinfo');
+    Route::put('produtos/{infoprod}', [ProdutosController::class, 'editinfo'])->name('produtos.editarinfo');
 
     ROute::get('produto/{produto}/delete', [ProdutosController::class, 'delete'])->name('produtos.delete');
+    ROute::get('produto/{infoprod}/delete-info', [ProdutosController::class, 'deleteinfo'])->name('produtos.deleteinfo');
+
     Route::get('produto', [ProdutosController::class, 'index'])->name('produtos.index');
 });
 

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Criar Categoria')
+@section('title', 'Criar Novo Produto')
 @section('page', 'Criar')
 @section('content')
 
@@ -9,6 +9,7 @@
 </div> --}}
 <a href="{{ route('produtos.index') }}" type="button" class="mt-0 mb-4 btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
 </a>
+<h1>Inserir novo produto</h1>
     <form method="POST" action="{{ route('produtos.insertInfoNovo') }}">
         @csrf
         
