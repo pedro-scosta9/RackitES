@@ -16,14 +16,22 @@ use Illuminate\Support\Facades\DB;
 
 class ProdutosController extends Controller
 {
-    public function index(Request $request)
+    function __construct()
     {
-
+        $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:product-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:product-delete', ['only' => ['destroy']]);
+    }
+    public function index(Request $request, $listID = [])
+    {
         $userid = Auth::user()->id;
         // $nomedaslistas = DB::select("select * from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
         $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
 
+        
         $input = $request->all();
+        
         if (!empty($input['SelectListaProdutos'])) {
             $teste = $request->SelectListaProdutos;
         } else {
@@ -33,12 +41,24 @@ class ProdutosController extends Controller
             }
         }
         // $produto = produto::all()->where('lista_produtos_id', $teste);
-
-        $produto = DB::select("select produtos.id as 'id', produtos.codigoBarras as 'codigoBarras', produtos.nome as 'nome', categorias.nome as 'categoria' from produtos inner join produtos_has_categorias on produtos.id = produtos_has_categorias.produtos_id inner join categorias on categorias.id = produtos_has_categorias.categorias_id where produtos.lista_produtos_id = ?", [$teste]);
         $armazens = armazen::all()->where('lista_produtos_id', $teste);
         $infoproduto = info_produto::all();
         $produtosCategorias = produtos_has_categoria::all()->where('lista_produtos_id', $teste);
+        return view('produtos.index', ['produto' => $listID, 'infoproduto' => $infoproduto, 'nomedaslistas' => $nomedaslistas, 'armazens' => $armazens, 'produtosCategorias' => $produtosCategorias]);
+    }
+    public function getList($id){
+        $userid = Auth::user()->id;
+        $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
+        $userHasLista = DB::select("SELECT * FROM users_has_listaprodutos WHERE users_id = ? and lista_produtos_id = ? ",[$userid,$id]);
+        if(empty($userHasLista)){
+            return redirect()->route('produtos.index');
+        }
+        $produto = DB::select("select produtos.id as 'id', produtos.codigoBarras as 'codigoBarras', produtos.nome as 'nome', categorias.nome as 'categoria' from produtos inner join produtos_has_categorias on produtos.id = produtos_has_categorias.produtos_id inner join categorias on categorias.id = produtos_has_categorias.categorias_id where produtos.lista_produtos_id = ?", [$id]);
+        $armazens = armazen::all()->where('lista_produtos_id', $id);
+        $infoproduto = info_produto::all();
+        $produtosCategorias = produtos_has_categoria::all()->where('lista_produtos_id', $id);
         return view('produtos.index', ['produto' => $produto, 'infoproduto' => $infoproduto, 'nomedaslistas' => $nomedaslistas, 'armazens' => $armazens, 'produtosCategorias' => $produtosCategorias]);
+
     }
     //Pagina create produto existente
     public function showcreate(Request $request)
@@ -198,6 +218,9 @@ class ProdutosController extends Controller
         $nomeCategoria = DB::select("select categorias.nome,categorias.id from categorias inner join lista_produtos on lista_produtos.id = categorias.lista_produtos_id where lista_produtos_id=?", [$teste]);
         $nomeArmazem = DB::select("select armazens.nome,armazens.id from armazens inner join lista_produtos on lista_produtos.id = armazens.lista_produtos_id where lista_produtos_id=?", [$teste]);
         return view('produtos.edit', ['produto' => $produto, 'nomeProdutos' => $nomeProdutos, 'nomeCategoria' => $nomeCategoria, 'nomeArmazem' => $nomeArmazem]);
+    }
+    public function getLista(){
+
     }
     public function edit(Request $request, produto $produto)
     {

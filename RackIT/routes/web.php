@@ -68,6 +68,7 @@ Route::group(['middleware' => ['auth']], function () {
     ROute::get('produto/{produto}/delete', [ProdutosController::class, 'delete'])->name('produtos.delete');
     ROute::get('produto/{infoprod}/delete-info', [ProdutosController::class, 'deleteinfo'])->name('produtos.deleteinfo');
 
+    Route::get('produto/get/{listID}', [ProdutosController::class, 'getList'])->name('produtos.teste');
     Route::get('produto', [ProdutosController::class, 'index'])->name('produtos.index');
 
 
