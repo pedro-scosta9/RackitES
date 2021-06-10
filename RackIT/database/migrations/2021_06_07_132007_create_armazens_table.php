@@ -17,7 +17,7 @@ class CreateArmazensTable extends Migration
             $table->id();
             $table->string('nome');
             $table->string('descricao');
-            $table->text('imagem');
+            $table->text('imagem')-> nullable();
             $table->unsignedBigInteger('lista_produtos_id');
             $table->foreign('lista_produtos_id')->references('id')->on('lista_produtos')->onDelete('cascade');
             

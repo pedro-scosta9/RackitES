@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\ArmazemController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProdutosController;
-
+use App\Http\Controllers\Info;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/infopremium', [App\Http\Controllers\infopremiumController::class, 'index'])->name('infopremium.index'); 
+
 Auth::routes();
 
 
@@ -30,7 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProdutosController::class);
-
+   
 
     // Route::resource('category', CategoriaController::class);
 
@@ -65,6 +68,24 @@ Route::group(['middleware' => ['auth']], function () {
     ROute::get('produto/{infoprod}/delete-info', [ProdutosController::class, 'deleteinfo'])->name('produtos.deleteinfo');
 
     Route::get('produto', [ProdutosController::class, 'index'])->name('produtos.index');
+
+
+
+    // ROTAS ARMAZEM
+    Route::get('armazens', [ArmazemController::class, 'index'])->name('armazens.index');
+    
+     
+     Route::get('armazens/add', [ArmazemController::class, 'showcreate'])->name('armazens.inserir');
+     ROute::post('armazens', [ArmazemController::class, 'create'])->name('armazens.insert');
+ 
+     // Route::post('categorias', [CategoriaController::class, 'refreshlista'])->name('categoria.refresh');
+ 
+     ROute::get('armazens/{armazens}/edit', [ArmazemController::class, 'showedit'])->name('armazens.edit');
+     Route::put('armazens/{armazens}', [ArmazemController::class, 'edit'])->name('armazens.editar');
+ 
+     ROute::get('armazens/{armazens}/delete', [ArmazemController::class, 'delete'])->name('armazens.delete');
+     
+
 });
 
 

@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class armazen extends Model
 {
     use HasFactory;
+     
 }
