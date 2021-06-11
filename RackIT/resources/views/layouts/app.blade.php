@@ -16,6 +16,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
             Fonts
             <link rel="dns-prefetch" href="//fonts.gstatic.com">
+            <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
             
             Scripts
             
@@ -55,26 +56,34 @@
                                     <a href="{{route('register')}}" class="nav-link">{{__('Register')}}</a>
                                 </li>
                             @else
-                                <li>
-                                    <a class="nav-link" href="{{route('users.index')}}">Utilizadores</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="{{route('roles.index')}}">Papeis</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="{{route('produtos.index')}}">Produtos</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="{{route('categoria.index')}}">Categorias</a>
-                                </li>
+                                @role('Admin')
                                     <li>
-                                    <a class="nav-link" href="{{route('armazens.index')}}">Armazem</a>
+                                        <a class="nav-link" href="{{route('users.index')}}">Gerir Utilizadores</a>
+                                    </li> 
+                                @endrole
+                                @role('Admin')
+                                    <li>
+                                        <a class="nav-link" href="{{route('roles.index')}}">Gerir Papeis</a>
+                                    </li>
+                                @endrole
+                                <li>
+                                    <a class="nav-link" href="{{route('produtos.index')}}">Gerir Produtos</a>
                                 </li>
                                 <li>
-                                    <a class="nav-link" href="{{route('infopremium.index')}}">Premium</a>
+                                    <a class="nav-link" href="{{route('categoria.index')}}">Gerir Categorias</a>
                                 </li>
+                                @role('Admin|Premium')
+                                    <li>
+                                        <a class="nav-link" href="{{route('armazens.index')}}">Gerir Armazem</a>
+                                    </li>
+                                @endrole
+                                @role('Admin|User')
+                                    <li>
+                                        <a class="nav-link" href="{{route('infopremium.index')}}">Info Premium</a>
+                                    </li>
+                                @endrole
                                 <li>
-                                    <a class="nav-link" href="{{route('listaProduto.index')}}">Lista de Produtos</a>
+                                    <a class="nav-link" href="{{route('listaProduto.index')}}">Gerir Lista de Produtos</a>
                                 </li>
                                 <li>
                                     <a class="nav-link" href="{{route('definicoes.index')}}">Definicoes</a>
@@ -87,7 +96,9 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
                                         <a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Terminar Sessão</a>
                                         <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none">@csrf</form>
-                                        <a class="dropdown-item" href="{{route('infopremium.index')}}">Info Premium</a>
+                                        @role('Admin|User')
+                                            <a class="dropdown-item" href="{{route('infopremium.index')}}">Info Premium</a>
+                                        @endrole
                                     </div>
                                 </li>
                             @endguest
