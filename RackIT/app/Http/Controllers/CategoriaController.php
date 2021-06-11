@@ -45,49 +45,42 @@ class CategoriaController extends Controller
         return view('categoria.index', ['categoria' => $categoria, 'nomedaslistas' => $nomedaslistas]);
     }
 
-    public function showcreate()
+    public function showcreate($id)
     {
-        $userid = Auth::user()->id;
-        // $nomedaslistas = DB::select("select * from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
-        $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
-        return view('categoria.create', ['nomedaslistas' => $nomedaslistas]);
+        $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos where lista_produtos.id=?", [$id]);
+        return view('categoria.create', ['nomedaslistas' => $nomedaslistas, 'id' => $id]);
     }
-    public function create(Request $request)
+    public function create(Request $request, $id)
     {
         $categoria = new categoria();
         $categoria->nome = $request->nome;
-        $userid = Auth::user()->id;
-        $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
-
        //fix para ir buscar o id da lista
-       $auxLista = DB::select("select id from lista_produtos where nome=?", [$request->lista]);
+        $auxLista = DB::select("select id from lista_produtos where nome=?", [$request->lista]);
       
-       foreach ($auxLista as $listaaux) {
-           //guardo produto na lista de produtos
-           $categoria->lista_produtos_id = $listaaux->id;
-           break;
-       }
-       
-        
+        foreach ($auxLista as $listaaux) {
+            //guardo produto na lista de produtos
+            $categoria->lista_produtos_id = $listaaux->id;
+            break;
+        }
         $categoria->save();
-        return redirect()->route('categoria.index');
+        return redirect()->route('categoria.teste',$id);
     }
 
-    public function showedit(categoria $categoria)
+    public function showedit(categoria $categoria, $id)
     {
-        return view('categoria.edit', ['categoria' => $categoria]);
+        return view('categoria.edit', ['categoria' => $categoria, 'id' => $id]);
     }
 
-    public function edit(Request $request, categoria $categoria)
+    public function edit(Request $request, categoria $categoria, $id)
     {
         $categoria->nome = $request->nome;
         $categoria->save();
-        return redirect()->route('categoria.index');
+        return redirect()->route('categoria.teste',$id);
     }
 
-    public function delete(categoria $categoria)
+    public function delete(categoria $categoria, $id)
     {
         $categoria->delete();
-        return redirect()->route('categoria.index');
+        return redirect()->route('categoria.teste',$id);
     }
 }

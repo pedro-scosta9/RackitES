@@ -2,8 +2,7 @@
 @section('title', 'Editar Armazem')
 @section('page', 'Editar')
 @section('content')
-
-    <form method="POST" action="{{ route('armazens.editar', $armazens) }}">
+    <form method="POST" action="{{ route('armazens.editar', [$armazens, $id]) }}">
         @csrf
         @method('put')
         <div class="row">

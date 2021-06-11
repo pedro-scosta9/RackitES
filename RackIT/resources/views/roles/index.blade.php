@@ -17,29 +17,29 @@
             <p>{{$message}}</p>
         </div>
     @endif
-<table class="table table-bordered">
-    <tr>
-        <th>Nº</th>
-        <th>Nome</th>
-        <th width="380px"></th>
-    </tr>
-    @foreach ($roles as $key=>$role )
+    <table class="table table-bordered">
         <tr>
-            <td>{{++$i}}</td>
-            <td>{{$role->name}}</td>
-            <td>
-                <a class="btn btn-info" href="{{route('roles.show',$role->id)}}">Detalhes</a>
-                @can('role-edit')
-                    <a class="btn btn-primary" href="{{route('roles.edit',$role->id)}}">Editar</a>
-                @endcan
-                @can('role-delete')
-                    {!! Form::open(['method'=>'DELETE','route'=>['roles.destroy',$role->id],'style'=>'display:inline']) !!}
-                    {!! Form::submit('Remover', ['class'=>'btn btn-danger']) !!}
-                    {!! Form::close() !!}
-                @endcan
-            </td>
+            <th>Nº</th>
+            <th>Nome</th>
+            <th width="380px"></th>
         </tr>
-    @endforeach
-</table>
-{!!$roles->render()!!}
+        @foreach ($roles as $key=>$role )
+            <tr>
+                <td>{{++$i}}</td>
+                <td>{{$role->name}}</td>
+                <td>
+                    <a class="btn btn-info" href="{{route('roles.show',$role->id)}}">Detalhes</a>
+                    @can('role-edit')
+                        <a class="btn btn-primary" href="{{route('roles.edit',$role->id)}}">Editar</a>
+                    @endcan
+                    @can('role-delete')
+                        {!! Form::open(['method'=>'DELETE','route'=>['roles.destroy',$role->id],'style'=>'display:inline']) !!}
+                        {!! Form::submit('Remover', ['class'=>'btn btn-danger']) !!}
+                        {!! Form::close() !!}
+                    @endcan
+                </td>
+            </tr>
+        @endforeach
+    </table>
+    {!!$roles->render()!!}
 @endsection

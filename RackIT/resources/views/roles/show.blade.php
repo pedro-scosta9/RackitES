@@ -10,23 +10,26 @@
             </div>
         </div>
     </div>
-
-
-
+    <br>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <b>Nome</b>
+                <b>Nome:</b>
                {{$role->name}}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <b>Permissões</b>
+                <b>Permissões:</b>
+                <br>
                 @if(!@empty($rolePermissions))
-                    @foreach ($rolePermissions as $value )
-                        <label class="label label-success">{{$value->name}}</label>
-                    @endforeach
+                    <ul>
+                        @foreach ($rolePermissions as $value )
+                            <li>
+                                <label class="label label-success">{{$value->name}}</label>
+                            </li>   
+                        @endforeach
+                    </ul>
                 @endif
             </div>
         </div>

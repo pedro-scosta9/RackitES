@@ -2,17 +2,13 @@
 @section('title', 'Criar Novo Produto')
 @section('page', 'Criar')
 @section('content')
-
-
-{{-- <div class="row">  
-        <a href="{{ route('produtos.index') }}" type="button" class="mt-0 mb-0 btn btn-primary">Introduzir um novo produto</a>
-</div> --}}
-<a href="{{ route('produtos.teste',$id) }}" type="button" class="mt-0 mb-4 btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
-</a>
-<h1>Inserir novo produto</h1>
+    <a href="{{ route('produtos.teste',$id) }}" type="button" class="mt-0 mb-4 btn btn-primary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        Voltar
+    </a>
+    <h1>Inserir novo produto</h1>
     <form method="POST" action="{{ route('produtos.insertInfoNovo', $id) }}">
-        @csrf
-        
+        @csrf 
         <div class="row">
             <div class="col-md-12" >
                 <div class="form-group">
@@ -24,40 +20,28 @@
                     </select>                    
                 </div>
             </div>
-        
-            
             <div class="col-md-12" >
                 <div class="form-group">
                     <label for="nome">Nome</label>
                     <input type="text"  name="nomeproduto" id="nomeproduto" class="form-control">
                 </div>
             </div>
-            
             <div class="col-md-12" >
                 <div class="form-group">
                     <label for="nome">Categoria</label>
                     <select class="form-select" size="1" name="categoria">
                         @foreach($nomeCategoria as $cat)
-                                <option values="{{$cat->id}}">{{$cat ->nome}}</option>
-                            @endforeach
-                        </select>                    
-                    </div>
+                            <option values="{{$cat->id}}">{{$cat ->nome}}</option>
+                        @endforeach
+                    </select>                    
                 </div>
-            
+            </div>
             <div class="col-md-12" >
                 <div class="form-group">
                     <label for="nome">Codigo de Barras</label>
-                        <input type="text"  name="codigoBarras" id="codigoBarras" class="form-control">
+                    <input type="text"  name="codigoBarras" id="codigoBarras" class="form-control">
                 </div>
             </div>
-
-            
-            {{-- <div class="col-md-12" >
-                <div class="form-group">
-                    <label for="nome">Codigo Barras</label>
-                    <input type="number" name="codigoBarras" id="codigoBarras" class="form-control">
-                </div>
-            </div> --}}
             <div class="col-md-12" >
                 <div class="form-group">
                     <label for="nome">Data de Compra</label>
@@ -82,7 +66,6 @@
                     <input type="decimal"  name="precoNormal" id="precoNormal" class="form-control">
                 </div>
             </div>
-            
             <div class="col-md-12" >
                 <div class="form-group">
                     <label for="nome">Armazenado</label>
@@ -97,7 +80,6 @@
         <div class="row">
             <button type="submit" class="mt-4 mb-4 btn btn-primary">Enviar</button>
         </div>
-        
     </form>
-    @endsection
+@endsection
     

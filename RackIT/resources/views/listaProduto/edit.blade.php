@@ -2,7 +2,6 @@
 @section('title', 'Editar lista de produtos ')
 @section('page', 'Editar')
 @section('content')
-
     <form method="POST" action="{{ route('listaProduto.editar', $listaProduto) }}">
         @csrf
         @method('put')
@@ -14,6 +13,8 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="mt-4 mb-4 btn btn-primary">Enviar</button>
+        <div class="row">
+            <button type="submit" class="mt-4 mb-4 btn btn-primary">Enviar</button>
+        </div>
     </form>
 @endsection

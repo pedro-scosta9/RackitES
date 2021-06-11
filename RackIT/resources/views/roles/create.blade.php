@@ -11,16 +11,15 @@
         </div>
     </div>
     @if (count($errors)>0)
-    <div class="alert alert-danger">
-        <b>OOOOOOppppps!!</b> existem erros que deve corrigir<br/><br/><br/>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
-        </ul>
-    </div>
+        <div class="alert alert-danger">
+            <b>OOOOOOppppps!!</b> existem erros que deve corrigir<br/><br/><br/>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
     @endif
-
     {!! Form::open(array('route'=>'roles.store','method'=>'POST')) !!}
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -43,5 +42,4 @@
         </div>
     </div>
     {!! Form::close() !!}
-
 @endsection

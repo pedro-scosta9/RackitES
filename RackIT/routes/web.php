@@ -28,7 +28,6 @@ Route::get('/infopremium', [App\Http\Controllers\infopremiumController::class, '
 
 Auth::routes();
 
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
@@ -39,15 +38,15 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::resource('category', CategoriaController::class);
 
     // ROTAS CATEGORIAS
-    Route::get('categoria/add', [CategoriaController::class, 'showcreate'])->name('categoria.inserir');
-    ROute::post('categoria', [CategoriaController::class, 'create'])->name('categoria.insert');
+    Route::get('categoria/add/lista/{id}', [CategoriaController::class, 'showcreate'])->name('categoria.inserir');
+    Route::post('categoria/lista/{id}', [CategoriaController::class, 'create'])->name('categoria.insert');
 
     // Route::post('categorias', [CategoriaController::class, 'refreshlista'])->name('categoria.refresh');
 
-    ROute::get('categoria/{categoria}/edit', [CategoriaController::class, 'showedit'])->name('categoria.edit');
-    Route::put('categoria/{categoria}', [CategoriaController::class, 'edit'])->name('categoria.editar');
+    Route::get('categoria/{categoria}/edit/lista/{id}', [CategoriaController::class, 'showedit'])->name('categoria.edit');
+    Route::put('categoria/{categoria}/{id}', [CategoriaController::class, 'edit'])->name('categoria.editar');
 
-    ROute::get('categoria/{categoria}/delete', [CategoriaController::class, 'delete'])->name('categoria.delete');
+    Route::get('categoria/{categoria}/delete/lista/{id}', [CategoriaController::class, 'delete'])->name('categoria.delete');
     Route::get('categoria/{listID}', [CategoriaController::class, 'getList'])->name('categoria.teste');
     Route::get('categoria', [CategoriaController::class, 'index'])->name('categoria.index');
 
@@ -55,19 +54,19 @@ Route::group(['middleware' => ['auth']], function () {
     // ROTAS PRODUTOS
     Route::get('produto/add/{id}', [ProdutosController::class, 'showcreate'])->name('produtos.inserir');
     Route::get('produto/addnovo/{id}', [ProdutosController::class, 'showcreatenovo'])->name('produtos.inserirnovo');
-    ROute::post('produto/{id}', [ProdutosController::class, 'create'])->name('produtos.insert');
-    ROute::post('produto/{id}', [ProdutosController::class, 'createnovo'])->name('produtos.insertnovo');
-    ROute::post('produtos/{id}', [ProdutosController::class, 'createInfoProd'])->name('produtos.insertInfo');
-    ROute::post('produto/{id}', [ProdutosController::class, 'createInfoProdNovo'])->name('produtos.insertInfoNovo');
+    Route::post('produto/{id}', [ProdutosController::class, 'create'])->name('produtos.insert');
+    Route::post('produto/{id}', [ProdutosController::class, 'createnovo'])->name('produtos.insertnovo');
+    Route::post('produtos/{id}', [ProdutosController::class, 'createInfoProd'])->name('produtos.insertInfo');
+    Route::post('produto/{id}', [ProdutosController::class, 'createInfoProdNovo'])->name('produtos.insertInfoNovo');
 
-    ROute::get('produto/{produto}/edit/lista/{id}', [ProdutosController::class, 'showedit'])->name('produtos.edit');
+    Route::get('produto/{produto}/edit/lista/{id}', [ProdutosController::class, 'showedit'])->name('produtos.edit');
     Route::put('produto/{produto}/{id}', [ProdutosController::class, 'edit'])->name('produtos.editar');
 
-    ROute::get('produto/{infoprod}/edit-info/lista/{id}', [ProdutosController::class, 'showeditinfo'])->name('produtos.editinfo');
+    Route::get('produto/{infoprod}/edit-info/lista/{id}', [ProdutosController::class, 'showeditinfo'])->name('produtos.editinfo');
     Route::put('produtos/{infoprod}/{id}', [ProdutosController::class, 'editinfo'])->name('produtos.editarinfo');
 
-    ROute::get('produto/{produto}/delete/{id}', [ProdutosController::class, 'delete'])->name('produtos.delete');
-    ROute::get('produto/{infoprod}/delete-info', [ProdutosController::class, 'deleteinfo'])->name('produtos.deleteinfo');
+    Route::get('produto/{produto}/delete/{id}', [ProdutosController::class, 'delete'])->name('produtos.delete');
+    Route::get('produto/{infoprod}/delete-info', [ProdutosController::class, 'deleteinfo'])->name('produtos.deleteinfo');
 
     Route::get('produto/{listID}', [ProdutosController::class, 'getList'])->name('produtos.teste');
     Route::get('produto', [ProdutosController::class, 'index'])->name('produtos.index');
@@ -77,30 +76,28 @@ Route::group(['middleware' => ['auth']], function () {
     // ROTAS ARMAZEM
     
     
-    Route::get('armazens/add', [ArmazemController::class, 'showcreate'])->name('armazens.inserir');
-    ROute::post('armazens', [ArmazemController::class, 'create'])->name('armazens.insert');
+    Route::get('armazens/add/lista/{id}', [ArmazemController::class, 'showcreate'])->name('armazens.inserir');
+    Route::post('armazens/{id}', [ArmazemController::class, 'create'])->name('armazens.insert');
     
     // Route::post('categorias', [CategoriaController::class, 'refreshlista'])->name('categoria.refresh');
     
-    ROute::get('armazens/{armazens}/edit', [ArmazemController::class, 'showedit'])->name('armazens.edit');
-    Route::put('armazens/{armazens}', [ArmazemController::class, 'edit'])->name('armazens.editar');
+    Route::get('armazens/{armazens}/edit/lista/{id}', [ArmazemController::class, 'showedit'])->name('armazens.edit');
+    Route::put('armazens/{armazens}/{id}', [ArmazemController::class, 'edit'])->name('armazens.editar');
     
-    ROute::get('armazens/{armazens}/delete', [ArmazemController::class, 'delete'])->name('armazens.delete');
+    Route::get('armazens/{armazens}/delete/lista/{id}', [ArmazemController::class, 'delete'])->name('armazens.delete');
     
     Route::get('armazens/{listID}', [ArmazemController::class, 'getList'])->name('armazens.teste');
     Route::get('armazens', [ArmazemController::class, 'index'])->name('armazens.index');
-     // Route::resource('listaProduto', CategoriaController::class);
     
-        // ROTAS Listas produtos
     Route::get('listaProduto/add', [ListaProdutosController::class, 'showcreate'])->name('listaProduto.inserir');
-    ROute::post('listaProduto', [ListaProdutosController::class, 'create'])->name('listaProduto.insert');
+    Route::post('listaProduto', [ListaProdutosController::class, 'create'])->name('listaProduto.insert');
     
         // Route::post('listaProduto', [CategoriaController::class, 'refreshlista'])->name('categoria.refresh');
     
-    ROute::get('listaProduto/{listaProduto}/edit', [ListaProdutosController::class, 'showedit'])->name('listaProduto.edit');
+    Route::get('listaProduto/{listaProduto}/edit', [ListaProdutosController::class, 'showedit'])->name('listaProduto.edit');
     Route::put('listaProduto/{listaProduto}', [ListaProdutosController::class, 'edit'])->name('listaProduto.editar');
     
-    ROute::get('listaProduto/{listaProduto}/delete', [ListaProdutosController::class, 'delete'])->name('listaProduto.delete');
+    Route::get('listaProduto/{listaProduto}/delete', [ListaProdutosController::class, 'delete'])->name('listaProduto.delete');
     Route::get('listaProduto', [ListaProdutosController::class, 'index'])->name('listaProduto.index');
 
 });
@@ -111,10 +108,10 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 // Route::get('categoria/add', [CategoriaController::class, 'showcreate'])->name('categoria.inserir');
-// ROute::post('categoria', [CategoriaController::class, 'create'])->name('categoria.insert');
+// Route::post('categoria', [CategoriaController::class, 'create'])->name('categoria.insert');
 
-// ROute::get('categoria/{categoria}/edit', [CategoriaController::class, 'showedit'])->name('categoria.edit');
+// Route::get('categoria/{categoria}/edit', [CategoriaController::class, 'showedit'])->name('categoria.edit');
 // Route::put('categoria/{categoria}', [CategoriaController::class, 'edit'])->name('categoria.editar');
 
-// ROute::get('categoria/{categoria}/delete', [CategoriaController::class, 'delete'])->name('categoria.delete');
+// Route::get('categoria/{categoria}/delete', [CategoriaController::class, 'delete'])->name('categoria.delete');
 // Route::get('categoria', [CategoriaController::class, 'index'])->name('categoria.index');

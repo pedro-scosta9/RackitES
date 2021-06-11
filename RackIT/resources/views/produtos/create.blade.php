@@ -2,14 +2,11 @@
 @section('title', 'Criar Produto Existente')
 @section('page', 'Criar')
 @section('content')
-
-<a href="{{ route('produtos.teste',$id) }}" type="button" class="mt-0 mb-4 btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
-</a>
-<h1>Inserir produto existente</h1>
-{{-- <div class="row">  
-        <a href="{{ route('produtos.index') }}" type="button" class="mt-0 mb-0 btn btn-primary">Introduzir um novo produto</a>
-</div> --}}
-{{-- <br> --}}
+    <a href="{{ route('produtos.teste',$id) }}" type="button" class="mt-0 mb-4 btn btn-primary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        Voltar
+    </a>
+    <h1>Inserir produto existente</h1>
     <form method="POST" action="{{ route('produtos.insertInfo', $id) }}">
         @csrf
         <div class="row">
@@ -23,23 +20,6 @@
                     </select>                    
                 </div>
             </div>
-            {{-- <div class="col-md-12" >
-                <div class="form-group">
-                    <label for="nome">Categoria</label>
-                    <select class="form-select" size="1" name="categoria">
-                        @foreach($nomeCategoria as $cat)
-                            <option values="{{$cat->id}}">{{$cat ->nome}}</option>
-                        @endforeach
-                    </select>                    
-                </div>
-            </div> --}}
-            
-            {{-- <div class="col-md-12" >
-                <div class="form-group">
-                    <label for="nome">Codigo Barras</label>
-                    <input type="number" name="codigoBarras" id="codigoBarras" class="form-control">
-                </div>
-            </div> --}}
             <div class="col-md-12" >
                 <div class="form-group">
                     <label for="nome">Data de Compra</label>
@@ -64,7 +44,6 @@
                     <input type="decimal"  name="precoNormal" id="nome" class="form-control">
                 </div>
             </div>
-            
             <div class="col-md-12" >
                 <div class="form-group">
                     <label for="nome">Armazenado</label>
@@ -79,7 +58,6 @@
         <div class="row">
             <button type="submit" class="mt-4 mb-4 btn btn-primary">Enviar</button>
         </div>
-        
     </form>
-    @endsection
+@endsection
     

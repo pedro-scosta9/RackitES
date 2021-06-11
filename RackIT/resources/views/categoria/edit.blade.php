@@ -2,8 +2,11 @@
 @section('title', 'Editar Categoria')
 @section('page', 'Editar')
 @section('content')
-
-    <form method="POST" action="{{ route('categoria.editar', $categoria) }}">
+    <a href="{{ route('categoria.teste',$id) }}" type="button" class="mt-0 mb-4 btn btn-primary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        Voltar 
+    </a>
+    <form method="POST" action="{{ route('categoria.editar', [$categoria, $id]) }}">
         @csrf
         @method('put')
         <div class="row">

@@ -67,11 +67,9 @@ class ProdutosController extends Controller
     }
 
     //Pagina create produto novo
-    public function showcreatenovo(Request $request, $id)
+    public function showcreatenovo($id)
     {
-        $userid = Auth::user()->id;
         $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos where lista_produtos.id=?", [$id]);
-
         $nomeCategoria = DB::select("select categorias.nome,categorias.id from categorias inner join lista_produtos on lista_produtos.id = categorias.lista_produtos_id where lista_produtos_id=?", [$id]);
         $nomeArmazem = DB::select("select armazens.nome,armazens.id from armazens inner join lista_produtos on lista_produtos.id = armazens.lista_produtos_id where lista_produtos_id=?", [$id]);
         

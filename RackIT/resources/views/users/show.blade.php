@@ -15,13 +15,13 @@
     <div class="row">
         <div class="col-xs-12 clo-sm-12 col-md-12">
             <div class="form-group">
-                <b>Nome</b>
+                <b>Nome:</b>
                 {{$user->name}}
             </div>
         </div>
         <div class="col-xs-12 clo-sm-12 col-md-12">
             <div class="form-group">
-                <b>E-mail</b>
+                <b>E-mail:</b>
                 {{$user->email}}
             </div>
         </div>
@@ -31,7 +31,6 @@
     <div class="col-xs-12 clo-sm-12 col-md-12">
         <div class="form-group">
             <b>Role</b>
-            {{-- {{$role->name}} --}}
         </div>
     </div>   
  </div>
