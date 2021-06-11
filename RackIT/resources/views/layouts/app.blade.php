@@ -92,10 +92,10 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
                                         <a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Terminar Sessão</a>
                                         <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none">@csrf</form>
+                                        <a class="dropdown-item" href="{{route('definicoes.index')}}">Definicões</a>
                                         @role('Admin|User')
                                             <a class="dropdown-item" href="{{route('infopremium.index')}}">Info Premium</a>
                                         @endrole
-                                        <a class="dropdown-item" href="{{route('definicoes.index')}}">Definicoes</a>
                                     </div>
                                 </li>
                             @endguest
