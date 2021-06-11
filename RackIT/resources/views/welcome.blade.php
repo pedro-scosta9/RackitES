@@ -197,7 +197,7 @@
 <main>
   <div class="position-relative overflow-hidden p-3 p-md-6 m-md-3 text-center bg-light" style="margin: 14rem !important;">
     <div class="col-md-10 p-lg-5 mx-auto my-5 " style="z-index: 900">
-      <h1 class="display-4 fw-normal"><font color="#333333">RackIT</font></h1>
+      <h1 style="font-family:verdana" class="display-4 fw-normal"><font color="#333333">RackIT</font></h1>
       <p class="lead fw-light"><font color="black">A RackIT é um sistema de gestão de inventario doméstico feito para facilitar a vida do
 utilizador.</font> </p>
       <a class="btn btn-outline-secondary" href="{{route('login')}}">Login</a>

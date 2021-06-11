@@ -55,24 +55,32 @@
                                     <a href="{{route('register')}}" class="nav-link">{{__('Register')}}</a>
                                 </li>
                             @else
-                                <li>
-                                    <a class="nav-link" href="{{route('users.index')}}">Utilizadores</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="{{route('roles.index')}}">Papeis</a>
-                                </li>
+                                @role('Admin')
+                                    <li>
+                                        <a class="nav-link" href="{{route('users.index')}}">Utilizadores</a>
+                                    </li> 
+                                @endrole
+                                @role('Admin')
+                                    <li>
+                                        <a class="nav-link" href="{{route('roles.index')}}">Papeis</a>
+                                    </li>
+                                @endrole
                                 <li>
                                     <a class="nav-link" href="{{route('produtos.index')}}">Produtos</a>
                                 </li>
                                 <li>
                                     <a class="nav-link" href="{{route('categoria.index')}}">Categorias</a>
                                 </li>
+                                @role('Admin|Premium')
                                     <li>
-                                    <a class="nav-link" href="{{route('armazens.index')}}">Armazem</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="{{route('infopremium.index')}}">Premium</a>
-                                </li>
+                                        <a class="nav-link" href="{{route('armazens.index')}}">Armazem</a>
+                                    </li>
+                                @endrole
+                                @role('Admin|User')
+                                    <li>
+                                        <a class="nav-link" href="{{route('infopremium.index')}}">Premium</a>
+                                    </li>
+                                @endrole
                                 <li>
                                     <a class="nav-link" href="{{route('listaProduto.index')}}">Lista de Produtos</a>
                                 </li>
@@ -87,7 +95,9 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
                                         <a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Terminar Sessão</a>
                                         <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none">@csrf</form>
-                                        <a class="dropdown-item" href="{{route('infopremium.index')}}">Info Premium</a>
+                                        @role('Admin|User')
+                                            <a class="dropdown-item" href="{{route('infopremium.index')}}">Info Premium</a>
+                                        @endrole
                                     </div>
                                 </li>
                             @endguest
