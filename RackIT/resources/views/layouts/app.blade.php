@@ -56,25 +56,28 @@
                                 </li>
                             @else
                                 <li>
-                                    <a class="nav-link" href="{{route('users.index')}}">Gerir Utilizadores</a>
+                                    <a class="nav-link" href="{{route('users.index')}}">Utilizadores</a>
                                 </li>
                                 <li>
-                                    <a class="nav-link" href="{{route('roles.index')}}">Gerir Papeis</a>
+                                    <a class="nav-link" href="{{route('roles.index')}}">Papeis</a>
                                 </li>
                                 <li>
-                                    <a class="nav-link" href="{{route('produtos.index')}}">Gerir Produtos</a>
+                                    <a class="nav-link" href="{{route('produtos.index')}}">Produtos</a>
                                 </li>
                                 <li>
-                                    <a class="nav-link" href="{{route('categoria.index')}}">Gerir Categorias</a>
+                                    <a class="nav-link" href="{{route('categoria.index')}}">Categorias</a>
                                 </li>
                                     <li>
-                                    <a class="nav-link" href="{{route('armazens.index')}}">Gerir Armazem</a>
+                                    <a class="nav-link" href="{{route('armazens.index')}}">Armazem</a>
                                 </li>
                                 <li>
-                                    <a class="nav-link" href="{{route('infopremium.index')}}">Info Premium</a>
+                                    <a class="nav-link" href="{{route('infopremium.index')}}">Premium</a>
                                 </li>
                                 <li>
-                                    <a class="nav-link" href="{{route('listaProduto.index')}}">Gerir Lista de Produtos</a>
+                                    <a class="nav-link" href="{{route('listaProduto.index')}}">Lista de Produtos</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="{{route('definicoes.index')}}">Definicoes</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

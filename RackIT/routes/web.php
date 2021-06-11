@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\Info;
+use App\Http\Controllers\DefinicoesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +100,13 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::get('listaProduto/{listaProduto}/delete', [ListaProdutosController::class, 'delete'])->name('listaProduto.delete');
     Route::get('listaProduto', [ListaProdutosController::class, 'index'])->name('listaProduto.index');
+
+    //ROTAS DEFINICOES
+    Route::get('definicoes/{id}', [DefinicoesController::class, 'update' ])->name('definicoes.update');
+    Route::get('definicoes/{definicoes}/edit', [DefinicoesController::class, 'showedit'])->name('definicoes.edit');
+    Route::get('definicoes', [DefinicoesController::class, 'index'])->name('definicoes.index');
+    
+    
 
 });
 
