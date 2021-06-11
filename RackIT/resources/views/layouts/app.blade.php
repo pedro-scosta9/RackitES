@@ -95,7 +95,7 @@
                                         @role('Admin|User')
                                             <a class="dropdown-item" href="{{route('infopremium.index')}}">Info Premium</a>
                                         @endrole
-                                        <a class="nav-link" href="{{route('definicoes.index')}}">Definicoes</a>
+                                        <a class="dropdown-item" href="{{route('definicoes.index')}}">Definicoes</a>
                                     </div>
                                 </li>
                             @endguest
