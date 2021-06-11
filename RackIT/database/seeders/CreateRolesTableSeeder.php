@@ -55,7 +55,7 @@ class CreateRolesTableSeeder extends Seeder
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Vegetais', $lista_produtos_id]);
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Outros', $lista_produtos_id]);
 
-        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Frigorifico", "Frio", "", 1, NULL, NULL)');
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Frigorifico", "Frio", "", "1", NULL, NULL)');
         DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Garagem", "Carro", "", "1", NULL, NULL)');
         DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Cozinha", "", "", "1", NULL, NULL)');
 
@@ -71,9 +71,6 @@ class CreateRolesTableSeeder extends Seeder
         DB::insert('insert into produtos_has_categorias (produtos_id,categorias_id) values (1,1)');
         DB::insert('insert into produtos_has_categorias (produtos_id,categorias_id) values (2,8)');
         DB::insert('insert into produtos_has_categorias (produtos_id,categorias_id) values (3,5)');
-
-
-
 
         //Premium User + Role
         $user = User::create([
@@ -110,7 +107,9 @@ class CreateRolesTableSeeder extends Seeder
         $role->syncPermissions([9,10,11,12,13,14,15,16,17,18,19,20]);
         $user->assignRole([$role->id]);
 
-        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Frigorifico", "Frio", "", 2, NULL, NULL)');
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Cozinha", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Garagem", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Outro", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
 
         //User + User Role
         $user = User::create([
@@ -133,7 +132,6 @@ class CreateRolesTableSeeder extends Seeder
         //Inserir dados na users_has_listaprodutos
         DB::insert('insert into users_has_listaprodutos (users_id,lista_produtos_id) values (?,?)', [$user_id, $lista_produtos_id]);
 
-
         //Criar categorias default da lista (Bebidas, Carnes, Peixes, Congelados, Cereais, Frutas e Vegetais)
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Bebidas', $lista_produtos_id]);
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Carnes', $lista_produtos_id]);
@@ -143,6 +141,10 @@ class CreateRolesTableSeeder extends Seeder
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Frutas', $lista_produtos_id]);
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Vegetais', $lista_produtos_id]);
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Outros', $lista_produtos_id]);
+
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Cozinha", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Garagem", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Outro", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
 
         DB::insert('insert into users_has_listaprodutos (users_id,lista_produtos_id) values (1,2)');
         DB::insert('insert into users_has_listaprodutos (users_id,lista_produtos_id) values (1,3)');
