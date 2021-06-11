@@ -46,11 +46,11 @@ class ProdutosController extends Controller
     }
     public function getList($id){
         $userid = Auth::user()->id;
-        $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
         $userHasLista = DB::select("SELECT * FROM users_has_listaprodutos WHERE users_id = ? and lista_produtos_id = ? ",[$userid,$id]);
         if(empty($userHasLista)){
             return redirect()->route('produtos.index');
         }
+        $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
         $produto = DB::select("select produtos.id as 'id', produtos.codigoBarras as 'codigoBarras', produtos.nome as 'nome', categorias.nome as 'categoria' from produtos inner join produtos_has_categorias on produtos.id = produtos_has_categorias.produtos_id inner join categorias on categorias.id = produtos_has_categorias.categorias_id where produtos.lista_produtos_id = ?", [$id]);
         $armazens = armazen::all()->where('lista_produtos_id', $id);
         $infoproduto = info_produto::all();
@@ -60,6 +60,11 @@ class ProdutosController extends Controller
     //Pagina create produto existente
     public function showcreate($id)
     {
+        $userid = Auth::user()->id;
+        $userHasLista = DB::select("SELECT * FROM users_has_listaprodutos WHERE users_id = ? and lista_produtos_id = ? ",[$userid,$id]);
+        if(empty($userHasLista)){
+            return redirect()->route('produtos.index');
+        }
         $nomeProdutos = DB::select("select produtos.nome, produtos.id from produtos inner join lista_produtos on lista_produtos.id = produtos.lista_produtos_id where produtos.lista_produtos_id=?", [$id]);
         $nomeCategoria = DB::select("select categorias.nome,categorias.id from categorias inner join lista_produtos on lista_produtos.id = categorias.lista_produtos_id where lista_produtos_id=?", [$id]);
         $nomeArmazem = DB::select("select armazens.nome,armazens.id from armazens inner join lista_produtos on lista_produtos.id = armazens.lista_produtos_id where lista_produtos_id=?", [$id]);
@@ -69,6 +74,11 @@ class ProdutosController extends Controller
     //Pagina create produto novo
     public function showcreatenovo($id)
     {
+        $userid = Auth::user()->id;
+        $userHasLista = DB::select("SELECT * FROM users_has_listaprodutos WHERE users_id = ? and lista_produtos_id = ? ",[$userid,$id]);
+        if(empty($userHasLista)){
+            return redirect()->route('produtos.index');
+        }
         $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos where lista_produtos.id=?", [$id]);
         $nomeCategoria = DB::select("select categorias.nome,categorias.id from categorias inner join lista_produtos on lista_produtos.id = categorias.lista_produtos_id where lista_produtos_id=?", [$id]);
         $nomeArmazem = DB::select("select armazens.nome,armazens.id from armazens inner join lista_produtos on lista_produtos.id = armazens.lista_produtos_id where lista_produtos_id=?", [$id]);
@@ -158,6 +168,11 @@ class ProdutosController extends Controller
 
     public function showedit(produto $produto, Request $request, $id)
     {
+        $userid = Auth::user()->id;
+        $userHasLista = DB::select("SELECT * FROM users_has_listaprodutos WHERE users_id = ? and lista_produtos_id = ? ",[$userid,$id]);
+        if(empty($userHasLista)){
+            return redirect()->route('produtos.index');
+        }
         $nomeProdutos = DB::select("select produtos.nome, produtos.id from produtos inner join lista_produtos on lista_produtos.id = produtos.lista_produtos_id where produtos.lista_produtos_id=?", [$id]);
         $nomeCategoria = DB::select("select categorias.nome,categorias.id from categorias inner join lista_produtos on lista_produtos.id = categorias.lista_produtos_id where lista_produtos_id=?", [$id]);
         $nomeArmazem = DB::select("select armazens.nome,armazens.id from armazens inner join lista_produtos on lista_produtos.id = armazens.lista_produtos_id where lista_produtos_id=?", [$id]);
@@ -187,6 +202,11 @@ class ProdutosController extends Controller
     //FIQUEI AQUI
     public function showeditinfo(info_produto $infoprod, $id)
     {
+        $userid = Auth::user()->id;
+        $userHasLista = DB::select("SELECT * FROM users_has_listaprodutos WHERE users_id = ? and lista_produtos_id = ? ",[$userid,$id]);
+        if(empty($userHasLista)){
+            return redirect()->route('produtos.index');
+        }
         $nomeProdutos = DB::select("select produtos.nome, produtos.id from produtos inner join lista_produtos on lista_produtos.id = produtos.lista_produtos_id where produtos.lista_produtos_id=?", [$id]);
         $nomeArmazem = DB::select("select armazens.nome,armazens.id from armazens inner join lista_produtos on lista_produtos.id = armazens.lista_produtos_id where lista_produtos_id=?", [$id]);
         return view('produtos.editinfo', ['infoprod' => $infoprod, 'nomeProdutos' => $nomeProdutos, 'nomeArmazem' => $nomeArmazem, 'id' => $id]);
