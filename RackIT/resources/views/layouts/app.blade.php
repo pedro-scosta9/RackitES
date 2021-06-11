@@ -84,9 +84,6 @@
                                 <li>
                                     <a class="nav-link" href="{{route('listaProduto.index')}}">Lista de Produtos</a>
                                 </li>
-                                <li>
-                                    <a class="nav-link" href="{{route('definicoes.index')}}">Definicoes</a>
-                                </li>
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{Auth::user()->name}}
@@ -98,6 +95,7 @@
                                         @role('Admin|User')
                                             <a class="dropdown-item" href="{{route('infopremium.index')}}">Info Premium</a>
                                         @endrole
+                                        <a class="nav-link" href="{{route('definicoes.index')}}">Definicoes</a>
                                     </div>
                                 </li>
                             @endguest
