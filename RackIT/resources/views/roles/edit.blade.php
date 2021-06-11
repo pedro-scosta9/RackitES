@@ -20,6 +20,7 @@
             </ul>
         </div>
     @endif
+    
    {!! Form::model($role, ['method'=>'PATCH','route'=>['roles.update',$role->id]]) !!}
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -42,4 +43,5 @@
         </div>
     </div>
     {!! Form::close() !!}
+
 @endsection
