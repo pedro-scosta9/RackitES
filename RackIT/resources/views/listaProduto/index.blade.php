@@ -18,6 +18,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Nome</th>
+                            <th>Add User</th>
                             <th>Editar</th>
                             <th>Apagar</th>
                         </tr>
@@ -27,8 +28,10 @@
                             <tr>
                                 <td>{{ $cat->id }}</td>
                                 <td>{{ $cat->nome }}</td>
+                                <td><a href="{{ route('listaProduto.addUser',$cat->id) }}" type="button" class="btn btn-primary font-weight-bold w-100"><i class="fa fa-plus" aria-hidden="true"> </i> Atribuir Utilizador</a></td>
                                 <td><a href="{{ route('listaProduto.edit',$cat->id) }}" type="button" class="btn btn-success font-weight-bold w-100"><i class="fa fa-edit" aria-hidden="true"> </i>  Editar</a></td>
                                 <td><a href="{{ route('listaProduto.delete',$cat->id) }}" type="button" class="btn btn-danger font-weight-bold w-100"><i class="fa fa-trash" aria-hidden="true"> </i>  Apagar</a></td>
+
 
 
                             </tr>
