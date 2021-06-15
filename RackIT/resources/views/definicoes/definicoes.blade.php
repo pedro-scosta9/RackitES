@@ -7,7 +7,7 @@
                 <div class="card-header">Alterar Palavra-Passe</div>
    
                 <div class="card-body">
-                    <form method="POST" action="">
+                    <form method="POST" action="{{route('definicoes.update')}}">
                         @csrf 
    
                          @foreach ($errors->all() as $error)

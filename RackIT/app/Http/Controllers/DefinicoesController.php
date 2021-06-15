@@ -11,31 +11,33 @@ use Illuminate\Support\Facades\Hash;
 class DefinicoesController extends Controller
 {
     public function index(){
-        return view ('definicoes/definicoes');
+        return view ('definicoes.definicoes');
     }
 
      
     public function update(Request $request)
     {       
         $userid = Auth::user()->id;
-        $userPassword = DB::select('select password from users', [$userid] );
-        
+        // $userPassword = DB::select('select password from users where users.id=?', [$userid] );
+        $user=User::find($userid);
         $request->validate([
             'current_password' => 'required',
             'password' => 'required|same:confirm_password|min:8',
             'confirm_password' => 'required',
         ]);
 
-        if (!Hash::check($request->current_password, $userPassword)) {
-            return back()->withErrors(['current_password'=>'Palavra-Passe não coincide.']);
-        }
+        // if (!Hash::check($request->current_password, $user)) {
+        //     return back()->withErrors(['current_password'=>'Palavra-Passe não coincide.']);
+        // }
 
-        $userid->password = Hash::make($request->password);
-        $userid->save();
-        return redirect()->route('definicoes.index')->with('success', 'Palavra-Passe alterada com sucesso.');
+        $request->password = Hash::make($request->password);
+        $user->password=$request->password;
+        $user->save();
+        return redirect()->route('home')->with('success', 'Palavra-Passe alterada com sucesso.');
     }
     
     public function showedit(){
+        
         return view('definicoes.edit');
     }
 }

@@ -122,9 +122,9 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     //ROTAS DEFINICOES
-    Route::get('definicoes/{id}', [DefinicoesController::class, 'update' ])->name('definicoes.update');
-    Route::get('definicoes/{definicoes}/edit', [DefinicoesController::class, 'showedit'])->name('definicoes.edit');
-    Route::get('definicoes', [DefinicoesController::class, 'index'])->name('definicoes.index');
+    Route::post('definicoes', [DefinicoesController::class, 'update' ])->name('definicoes.update');
+    Route::get('definicoes/edit', [DefinicoesController::class, 'showedit'])->name('definicoes.edit');
+    Route::get('definicoes/definicoes', [DefinicoesController::class, 'index'])->name('definicoes.index');
     
     
 
