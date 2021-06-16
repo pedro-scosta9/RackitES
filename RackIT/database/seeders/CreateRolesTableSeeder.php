@@ -56,8 +56,9 @@ class CreateRolesTableSeeder extends Seeder
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Outros', $lista_produtos_id]);
 
         DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Frigorifico", "Frio", "", "1", NULL, NULL)');
-        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Garagem", "Carro", "", "1", NULL, NULL)');
-        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Cozinha", "", "", "1", NULL, NULL)');
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Cozinha", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Garagem", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Outro", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
 
         DB::insert('INSERT INTO produtos (id, nome, codigoBarras, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Iogurte", 123, 1, "2021-06-07 17:46:23", "2021-06-07 17:46:23")');
         DB::insert('INSERT INTO produtos (id, nome, codigoBarras, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Pneu", 12345642, 1, "2021-06-07 17:46:51", NULL)');
@@ -107,6 +108,7 @@ class CreateRolesTableSeeder extends Seeder
         $role->syncPermissions([9,10,11,12,13,14,15,16,17,18,19,20]);
         $user->assignRole([$role->id]);
 
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Frigorifico", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
         DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Cozinha", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
         DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Garagem", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
         DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Outro", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
@@ -142,6 +144,7 @@ class CreateRolesTableSeeder extends Seeder
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Vegetais', $lista_produtos_id]);
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Outros', $lista_produtos_id]);
 
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Frigorifico", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
         DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Cozinha", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
         DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Garagem", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
         DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Outro", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
