@@ -19,20 +19,10 @@ class CategoriaController extends Controller
         $this->middleware('permission:category-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:category-delete', ['only' => ['destroy']]);
     }
-    public function index(Request $request)
+    public function index()
     {
         $userid = Auth::user()->id;
-        // $nomedaslistas = DB::select("select * from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
         $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
-        $input = $request->all();
-        if (!empty($input['SelectListaProdutos'])) {
-            $teste = $request->SelectListaProdutos;
-        } else {
-            foreach ($nomedaslistas as $lista) {
-                $teste = $lista->id;
-                break;
-            }
-        }
         $categoria = [];
         return view('categoria.index', ['categoria' => $categoria, 'nomedaslistas' => $nomedaslistas]);
     }
@@ -40,11 +30,9 @@ class CategoriaController extends Controller
     {
         $userid = Auth::user()->id;
         $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
-
         $categoria = categoria::all()->where('lista_produtos_id', $id);
         return view('categoria.index', ['categoria' => $categoria, 'nomedaslistas' => $nomedaslistas]);
     }
-
     public function showcreate($id)
     {
         $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos where lista_produtos.id=?", [$id]);
@@ -54,14 +42,7 @@ class CategoriaController extends Controller
     {
         $categoria = new categoria();
         $categoria->nome = $request->nome;
-       //fix para ir buscar o id da lista
-        $auxLista = DB::select("select id from lista_produtos where nome=?", [$request->lista]);
-      
-        foreach ($auxLista as $listaaux) {
-            //guardo produto na lista de produtos
-            $categoria->lista_produtos_id = $listaaux->id;
-            break;
-        }
+        $categoria->lista_produtos_id = $id;
         $categoria->save();
         return redirect()->route('categoria.teste',$id);
     }
