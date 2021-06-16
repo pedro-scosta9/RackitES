@@ -32,7 +32,6 @@ class ListaProdutosController extends Controller
     {
         $listaProduto = new lista_produto();
         $listaProduto->nome = $request->nome;
-
         $listaProduto->save();
         $userLista=  new users_has_listaproduto();
         $userid = Auth::user()->id;
@@ -40,6 +39,21 @@ class ListaProdutosController extends Controller
         $userLista -> lista_produtos_id = $listaProduto -> id;
         $userLista -> save();
         $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
+
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Bebidas', $listaProduto -> id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Carnes', $listaProduto -> id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Peixes', $listaProduto -> id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Congelados', $listaProduto -> id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Cereais', $listaProduto -> id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Frutas', $listaProduto -> id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Vegetais', $listaProduto -> id]);
+        DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Outros', $listaProduto -> id]);
+
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Frigorifico", "", "", ?, NULL, NULL)', [$listaProduto -> id]);
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Cozinha", "", "", ?, NULL, NULL)', [$listaProduto -> id]);
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Garagem", "", "", ?, NULL, NULL)', [$listaProduto -> id]);
+        DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Outro", "", "", ?, NULL, NULL)', [$listaProduto -> id]);
+
         return redirect()->route('listaProduto.index',[ 'nomedaslistas' => $nomedaslistas]);
     }
     
@@ -79,8 +93,6 @@ class ListaProdutosController extends Controller
 
 
     public function showedit(lista_produto $listaProduto)
-    
-    
     {
         return view('listaProduto.edit', ['listaProduto' => $listaProduto]);
     }
