@@ -51,13 +51,7 @@ class ArmazemController extends Controller
         $armazens = new armazen();
         $armazens->nome = $request->nome;
         $armazens->descricao = $request->descricao;
-        $auxLista = DB::select("select id from lista_produtos where nome=?", [$request->lista]);
-      
-        foreach ($auxLista as $listaaux) {
-            //guardo produto na lista de produtos
-            $armazens->lista_produtos_id = $listaaux->id;
-            break;
-        }
+        $armazens->lista_produtos_id = $id;
 
         $armazens->save();
         return redirect()->route('armazens.teste',$id);

@@ -61,7 +61,7 @@ class CreateRolesTableSeeder extends Seeder
         DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Outro", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
 
         DB::insert('INSERT INTO produtos (id, nome, codigoBarras, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Iogurte", 123, 1, "2021-06-07 17:46:23", "2021-06-07 17:46:23")');
-        DB::insert('INSERT INTO produtos (id, nome, codigoBarras, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Pneu", 12345642, 1, "2021-06-07 17:46:51", NULL)');
+        DB::insert('INSERT INTO produtos (id, nome, codigoBarras, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Pneu", 12345642, 1, "2021-06-07 17:46:51", "2021-06-07 17:46:51")');
         DB::insert('INSERT INTO produtos (id, nome, codigoBarras, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Bolacha", 534534, 1, "2021-06-07 18:12:51", "2021-07-04 18:12:51")');
 
         DB::insert('INSERT INTO info_produtos (id, dataCompra, dataValidade, precoCompra, precoNormal, produtosID, armazemID, created_at, updated_at) VALUES (NULL, "2021-06-02", "2021-06-10", 1.54, 1.99, 1, 1, NULL, NULL)');

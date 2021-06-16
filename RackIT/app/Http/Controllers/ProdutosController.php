@@ -88,8 +88,8 @@ class ProdutosController extends Controller
     public function createInfoProd(Request $request, $id)
     {
         $infoproduto = new info_produto();
-        $auxprodutoID = DB::select("select produtos.id from produtos where nome=?", [$request->nome]);
-        $auxarmazemID = DB::select("select armazens.id from armazens where nome=?", [$request->armazem]);
+        $auxprodutoID = DB::select("select produtos.id from produtos where nome=? and produtos.lista_produtos_id = ?", [$request->nome, $id]);
+        $auxarmazemID = DB::select("select armazens.id from armazens where nome=? and armazens.lista_produtos_id = ?", [$request->armazem, $id]);
         foreach ($auxprodutoID as $aux) {
             $idaux = $aux->id;
             break;
@@ -127,8 +127,8 @@ class ProdutosController extends Controller
         $produto->save();
 
         //vou buscar o id do produt e categoria
-        $auxprodutoID = DB::select("select produtos.id from produtos where nome=?", [$produto->nome]);
-        $auxcateogiraID = DB::select("select categorias.id from categorias where nome=?", [$request->categoria]);
+        $auxprodutoID = DB::select("select produtos.id from produtos where nome=? and produtos.lista_produtos_id = ?", [$request->nome, $id]);
+        $auxcateogiraID = DB::select("select categorias.id from categorias where nome = ? and categorias.lista_produtos_id", [$request->categoria, $id]);
 
         //fix para ir buscar o id
         foreach ($auxprodutoID as $aux) {
@@ -182,7 +182,7 @@ class ProdutosController extends Controller
         $produto->save();
 
         DB::table('produtos_has_categorias')->where('produtos_id', $produto->id)->delete();
-        $auxcateogiraID = DB::select("select categorias.id from categorias where nome=?", [$request->categoria]);
+        $auxcateogiraID = DB::select("select categorias.id from categorias where nome = ? and categorias.lista_produtos_id", [$request->categoria, $id]);
         //fix para ir buscar o id
         foreach ($auxcateogiraID as $aux) {
             $idcat = $aux->id;
@@ -194,7 +194,6 @@ class ProdutosController extends Controller
         $prodCat->save();
         return redirect()->route('produtos.teste',$id);
     }
-
 
     //FIQUEI AQUI
     public function showeditinfo(info_produto $infoprod, $id)
@@ -211,9 +210,8 @@ class ProdutosController extends Controller
     public function editinfo(Request $request, info_produto $infoprod, $id)
     {
         // $produto = new produto();
-
         $infoproduto = new info_produto();
-        $auxarmazemID = DB::select("select armazens.id from armazens where nome=?", [$request->armazem]);
+        $auxarmazemID = DB::select("select armazens.id from armazens where nome=? and armazens.lista_produtos_id = ?", [$request->armazem, $id]);
         foreach ($auxarmazemID as $aux) {
             $idArmazemAUX = $aux->id;
             break;
@@ -228,7 +226,6 @@ class ProdutosController extends Controller
         DB::table('info_produtos')->where('id', $infoprod->id)->delete();
         return redirect()->route('produtos.teste',$id);
     }
-
     public function delete(produto $produto, $id)
     {
         $produto->delete();

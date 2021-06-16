@@ -23,7 +23,7 @@
             <div class="col-md-12" >
                 <div class="form-group">
                     <label for="nome">Nome</label>
-                    <input type="text"  name="nomeproduto" id="nomeproduto" class="form-control">
+                    <input type="text" required name="nomeproduto" id="nomeproduto" class="form-control">
                 </div>
             </div>
             <div class="col-md-12" >
@@ -39,7 +39,7 @@
             <div class="col-md-12" >
                 <div class="form-group">
                     <label for="nome">Codigo de Barras</label>
-                    <input type="text"  name="codigoBarras" id="codigoBarras" class="form-control">
+                    <input type="text" name="codigoBarras" id="codigoBarras" class="form-control">
                 </div>
             </div>
             <div class="col-md-12" >
