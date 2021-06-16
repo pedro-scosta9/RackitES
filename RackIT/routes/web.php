@@ -105,7 +105,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::patch('listaProdutos/{listaProduto}', [ListaProdutosController::class, 'add'])->name('listaProduto.adicionarUser');
 
     ROute::get('listaProduto/{listaProduto}/edit-user', [ListaProdutosController::class, 'showedituser'])->name('listProdutoedituser');
-    Route::put('listaProdutoss/{listaProduto}', [ListaProdutosController::class, 'edituser'])->name('listaProduto.editaruser';  
+    Route::put('listaProdutoss/{listaProduto}', [ListaProdutosController::class, 'edituser'])->name('listaProduto.editaruser');  
     ROute::get('listaProduto/{listaProduto}/delete', [ListaProdutosController::class, 'delete'])->name('listaProduto.delete');
     Route::get('listaProduto', [ListaProdutosController::class, 'index'])->name('listaProduto.index');
 
