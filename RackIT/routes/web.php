@@ -92,39 +92,27 @@ Route::group(['middleware' => ['auth']], function () {
     
    
     
-        // Route::resource('listaProduto', CategoriaController::class);
+    // Route::resource('listaProduto', CategoriaController::class);
+
+    // ROTAS Listas produtos
+    Route::get('listaProduto/add', [ListaProdutosController::class, 'showcreate'])->name('listaProduto.inserir');
+    Route::post('listaProduto', [ListaProdutosController::class, 'create'])->name('listaProduto.insert');
     
-        // ROTAS Listas produtos
-        Route::get('listaProduto/add', [ListaProdutosController::class, 'showcreate'])->name('listaProduto.inserir');
-        Route::post('listaProduto', [ListaProdutosController::class, 'create'])->name('listaProduto.insert');
-        
-        // Route::post('listaProduto', [CategoriaController::class, 'refreshlista'])->name('categoria.refresh');
-    
-        ROute::get('listaProduto/{listaProduto}/edit', [ListaProdutosController::class, 'showedit'])->name('listaProduto.edit');
-        Route::put('listaProduto/{listaProduto}', [ListaProdutosController::class, 'edit'])->name('listaProduto.editar');
+    // Route::post('listaProduto', [CategoriaController::class, 'refreshlista'])->name('categoria.refresh');
+    ROute::get('listaProduto/{listaProduto}/edit', [ListaProdutosController::class, 'showedit'])->name('listaProduto.edit');
+    Route::put('listaProduto/{listaProduto}', [ListaProdutosController::class, 'edit'])->name('listaProduto.editar');
+    ROute::get('listaProduto/{listaProduto}/add', [ListaProdutosController::class, 'showadd'])->name('listaProduto.addUser');
+    Route::patch('listaProdutos/{listaProduto}', [ListaProdutosController::class, 'add'])->name('listaProduto.adicionarUser');
 
-        ROute::get('listaProduto/{listaProduto}/add', [ListaProdutosController::class, 'showadd'])->name('listaProduto.addUser');
-        Route::patch('listaProdutos/{listaProduto}', [ListaProdutosController::class, 'add'])->name('listaProduto.adicionarUser');
-
-
-
-
-
-
-        ROute::get('listaProduto/{listaProduto}/edit-user', [ListaProdutosController::class, 'showedituser'])->name('listProduto.edituser');
-        Route::put('listaProdutoss/{listaProduto}', [ListaProdutosController::class, 'edituser'])->name('listaProduto.editaruser');  
-
-        ROute::get('listaProduto/{listaProduto}/delete', [ListaProdutosController::class, 'delete'])->name('listaProduto.delete');
-        Route::get('listaProduto', [ListaProdutosController::class, 'index'])->name('listaProduto.index');
-
-
-
-
+    ROute::get('listaProduto/{listaProduto}/edit-user', [ListaProdutosController::class, 'showedituser'])->name('listProdutoedituser');
+    Route::put('listaProdutoss/{listaProduto}', [ListaProdutosController::class, 'edituser'])->name('listaProduto.editaruser';  
+    ROute::get('listaProduto/{listaProduto}/delete', [ListaProdutosController::class, 'delete'])->name('listaProduto.delete');
+    Route::get('listaProduto', [ListaProdutosController::class, 'index'])->name('listaProduto.index');
 
     //ROTAS DEFINICOES
-    Route::post('definicoes', [DefinicoesController::class, 'update' ])->name('definicoes.update');
-    Route::get('definicoes/edit', [DefinicoesController::class, 'showedit'])->name('definicoes.edit');
-    Route::get('definicoes/definicoes', [DefinicoesController::class, 'index'])->name('definicoes.index');
+    Route::get('definicoes/{id}', [DefinicoesController::class, 'update' ])->name('definicoes.update');
+    Route::get('definicoes/{definicoes}/edit', [DefinicoesController::class, 'showedit'])->name('definicoes.edit');
+    Route::get('definicoes', [DefinicoesController::class, 'index'])->name('definicoes.index');
     
     
 

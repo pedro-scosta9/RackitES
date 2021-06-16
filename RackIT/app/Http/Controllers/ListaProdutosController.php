@@ -44,37 +44,37 @@ class ListaProdutosController extends Controller
     }
     
 
-    public function showadd( $listaProduto)
-    
+    public function showadd($listaProduto)
     {
         return view('listaProduto.add', ['listaProduto' => $listaProduto]);
     }
 
-    public function add(Request $request,  $listaProduto)
+    public function add(Request $request, $listaProduto)
     {   
-        
-
         // $valor= $request->validate($request,['email' => 'required']);
        
         $email = $request->email;
         // return view('home');
 
         //   $userid = DB::select('select users.id FROM users where users.email = ?',[$email]) ;
-         $userid = DB::table('users')->where('email', $email)->first();
+        $userid = DB::table('users')->where('email', $email)->first();
+        $has = DB::select('select * from users_has_listaprodutos where users_id = ? and lista_produtos_id = ?',[$userid -> id, $listaProduto]);
         //  $nomedaslistas = DB::select("select lista_produtos.nome as nome, lista_produtos.id as id from lista_produtos inner join users_has_listaprodutos on lista_produtos.id = users_has_listaprodutos.lista_produtos_id inner join users on users.id = users_has_listaprodutos.users_id where users.id = ?", [$userid]);
-         $nomedaslistas = [];
-        if (!empty($userid)) {
-            
-             $userLista=  new users_has_listaproduto();
-            
+        $nomedaslistas = [];
+        $user = User::find($userid -> id);
+        $role = $user->hasRole('Admin');
+        if (!empty($userid) && empty($has) && !$role) {
+            $userLista=  new users_has_listaproduto();
             $userLista->lista_produtos_id = $listaProduto;
-             $userLista-> users_id = $userid-> id;
-             $userLista->save();
-             return redirect()->route('listaProduto.index', [ 'nomedaslistas' => $nomedaslistas]);
-         }
-         else {
-            return view('listaProduto.add',['erro'=>'erro']);
-         }
+            $userLista-> users_id = $userid-> id;
+            $userLista->save();
+            return redirect()->route('listaProduto.index', [ 'nomedaslistas' => $nomedaslistas]);
+        } else if($role) {
+            return redirect()->route('listaProduto.index', [ 'nomedaslistas' => $nomedaslistas]);
+        }
+        else {
+            return view('listaProduto.add',['erro'=>'erro', 'listaProduto' => $listaProduto]);
+        }
     }
 
 

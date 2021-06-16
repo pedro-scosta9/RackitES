@@ -66,8 +66,6 @@ class UserController extends Controller
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Vegetais', $lista_produtos_id]);
         DB::insert('insert into categorias (nome,lista_produtos_id) values (?,?)', ['Outros', $lista_produtos_id]);
 
-
-
         //Criar armazens default na listaProdutos 
         DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Frigorifico", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
         DB::insert('INSERT INTO armazens (id, nome, descricao, imagem, lista_produtos_id, created_at, updated_at) VALUES (NULL, "Garagem", "", "", ?, NULL, NULL)', [$lista_produtos_id]);
@@ -90,20 +88,18 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'sometimes|required|email|unique:users,' . $id,
             'password' => 'same:confirm-password',
             'roles' => 'required'
         ]);
+        $user = User::find($id);
+        $user->roles()->detach();
         $input = $request->all();
         if (!empty($input['password'])) {
             $input['password'] = Hash::make($input['password']);
         } else {
-            $input = Arr::except($input, array('password'));
+            $input['password'] = $user->password;
         }
-        //ERRO NO EMAIL
-        $user = User::find($id);
-        $user->update($input);
-        DB::table('model_has_roles')->where('model_id', $id)->delete();
+        DB::update('update users set name = ? , password = ?, email = ? where users.id = ?',[$request->name,$input['password'],$request->email,$id]);
         $user->assignRole($request->input('roles'));
         return redirect()->route('users.index')->with('success', 'Utilizador atualizado com sucesso.');
     }

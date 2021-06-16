@@ -3,7 +3,7 @@
 @section('title', 'Adicionar user ')
 @section('page', 'Criar')
 @section('content')
-    <form method="POST" action="{{ route('listaProduto.adicionarUser',$listaProduto) }}">
+    <form method="POST" action="{{ route('listaProduto.adicionarUser', $listaProduto) }}">
         @csrf
         @method('patch')
         <div class="row">
@@ -15,7 +15,7 @@
             </div>
         </div>
         @if (!empty($erro))
-            <p class="text-danger">ERRO- E-MAIL INVALIDO </p>
+            <p class="text-danger">ERRO - E-MAIL INVALIDO </p>
         @endif
         <button type="submit" class="mt-4 mb-4 btn btn-primary">Enviar</button>
     </form>
