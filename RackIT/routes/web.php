@@ -110,12 +110,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('listaProduto', [ListaProdutosController::class, 'index'])->name('listaProduto.index');
 
     //ROTAS DEFINICOES
-    Route::get('definicoes/{id}', [DefinicoesController::class, 'update' ])->name('definicoes.update');
-    Route::get('definicoes/{definicoes}/edit', [DefinicoesController::class, 'showedit'])->name('definicoes.edit');
+    Route::post('definicoes', [DefinicoesController::class, 'update' ])->name('definicoes.update');
+    Route::get('definicoes/edit', [DefinicoesController::class, 'showedit'])->name('definicoes.edit');
     Route::get('definicoes', [DefinicoesController::class, 'index'])->name('definicoes.index');
-    
-    
-
 });
 
 

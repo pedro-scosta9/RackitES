@@ -127,9 +127,8 @@ class ProdutosController extends Controller
         $produto->save();
 
         //vou buscar o id do produt e categoria
-        $auxprodutoID = DB::select("select produtos.id from produtos where nome=? and produtos.lista_produtos_id = ?", [$request->nome, $id]);
-        $auxcateogiraID = DB::select("select categorias.id from categorias where nome = ? and categorias.lista_produtos_id", [$request->categoria, $id]);
-
+        $auxprodutoID = DB::select("select produtos.id from produtos where nome=? and produtos.lista_produtos_id = ?", [$request->nomeproduto, $id]);
+        $auxcateogiraID = DB::select("select categorias.id from categorias where nome = ? and categorias.lista_produtos_id = ?", [$request->categoria, $id]);
         //fix para ir buscar o id
         foreach ($auxprodutoID as $aux) {
             $idaux = $aux->id;
@@ -182,7 +181,7 @@ class ProdutosController extends Controller
         $produto->save();
 
         DB::table('produtos_has_categorias')->where('produtos_id', $produto->id)->delete();
-        $auxcateogiraID = DB::select("select categorias.id from categorias where nome = ? and categorias.lista_produtos_id", [$request->categoria, $id]);
+        $auxcateogiraID = DB::select("select categorias.id from categorias where nome = ? and categorias.lista_produtos_id = ?", [$request->categoria, $id]);
         //fix para ir buscar o id
         foreach ($auxcateogiraID as $aux) {
             $idcat = $aux->id;
