@@ -11,6 +11,4 @@ Para consultar:
 - Por fim a vizualização dos nossos diagramas podem ser consultados individualmente neste ( [Link](https://github.com/RackitES/Rackit/tree/main/ANALISE%20SISTEMA%20RACKIT ) )
 
 
-Menbros do projeto:
 
--Diogo Pereira 036751 | -Leandro Barroso 036681 | -Pedro Costa 037160 | -Simão Fernandes 037703 | -Rui Coelho 036610
